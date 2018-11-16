@@ -1,0 +1,46 @@
+{
+    "name": "@byteowls/capacitor-sms",
+    "version": "1.0.0-alpha.1",
+    "description": "Capacitor SMS plugin",
+    "author": "Michael Oberwasserlechner",
+    "homepage": "https://github.com/moberwasserlechner/capacitor-sms",
+    "license": "MIT",
+    "main": "dist/esm/index.js",
+    "types": "dist/esm/index.d.ts",
+    "scripts": {
+        "build": "npm run clean && tsc",
+        "clean": "rm -rf ./dist",
+        "watch": "tsc --watch",
+        "prepublishOnly": "npm run build"
+    },
+    "files": [
+        "dist/",
+        "android/"
+    ],
+    "keywords": [
+        "capacitor",
+        "capacitor-plugin",
+        "sms"
+    ],
+    "capacitor": {
+        "android": {
+            "src": "android"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/moberwasserlechner/capacitor-sms"
+    },
+    "bugs": {
+        "url": "https://github.com/moberwasserlechner/capacitor-sms/issues"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {
+        "@capacitor/core": "1.0.0-beta.8"
+    },
+    "devDependencies": {
+        "typescript": "2.9.1"
+    }
+}
