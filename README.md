@@ -39,38 +39,7 @@ export class AppComponent implements OnInit {
 ### Use it
 
 ```typescript
-import {
-  Plugins
-} from '@capacitor/core';
-
-@Component({
-  template: '<button (click)="onOAuthBtnClick()">Login with OAuth</button>' +
-   '<button (click)="onLogoutClick()">Logout OAuth</button>'
-})
-export class SignupComponent {
-    onOAuthBtnClick() {
-        Plugins.OAuth2Client.authenticate(
-            oauth2Options
-        ).then(resourceUrlResponse => {
-            let accessToken = resourceUrlResponse["access_token"];
-            let oauthUserId = resourceUrlResponse["id"];
-            let name = resourceUrlResponse["name"];
-            // go to backend
-        }).catch(reason => {
-            console.error("OAuth rejected", reason);
-        });
-    }
-
-    onLogoutClick() {
-            Plugins.OAuth2Client.logout(
-                oauth2Options
-            ).then(() => {
-                // do something
-            }).catch(reason => {
-                console.error("OAuth logout failed", reason);
-            });
-        }
-}
+TODO
 ```
 
 ### Options
