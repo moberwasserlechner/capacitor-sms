@@ -9,12 +9,12 @@ import com.getcapacitor.PluginMethod;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-@NativePlugin(requestCodes = { SmsPlugin.REQUEST_CODE }, name = "Sms")
-public class SmsPlugin extends Plugin {
+@NativePlugin(requestCodes = { SmsManagerPlugin.REQUEST_CODE }, name = "SmsManager")
+public class SmsManagerPlugin extends Plugin {
 
     static final int REQUEST_CODE = 2200;
 
-    public SmsPlugin() {}
+    public SmsManagerPlugin() {}
 
     @PluginMethod()
     public void send(final PluginCall call) {

@@ -1,16 +1,16 @@
 import {WebPlugin} from '@capacitor/core';
-import {SmsOptions, SmsPlugin} from "./definitions";
+import {SmsSendOptions, SmsManagerPlugin} from "./definitions";
 
-export class SmsPluginWeb extends WebPlugin implements SmsPlugin {
+export class SmsManagerPluginWeb extends WebPlugin implements SmsManagerPlugin {
 
     constructor() {
         super({
-            name: 'Sms',
+            name: 'SmsManager',
             platforms: ['web']
         });
     }
 
-    async send(options: SmsOptions): Promise<any> {
+    async send(options: SmsSendOptions): Promise<any> {
         return new Promise<any>((resolve, reject) => {
             resolve();
         });
@@ -18,6 +18,6 @@ export class SmsPluginWeb extends WebPlugin implements SmsPlugin {
 
 }
 
-const Sms = new SmsPluginWeb();
+const SmsManager = new SmsManagerPluginWeb();
 
-export { Sms };
+export { SmsManager };

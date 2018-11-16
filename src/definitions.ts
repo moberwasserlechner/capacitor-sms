@@ -1,19 +1,19 @@
 declare global {
     interface PluginRegistry {
-        Sms?: SmsPlugin;
+        SmsManager?: SmsManagerPlugin;
     }
 }
 
-export interface SmsPlugin {
+export interface SmsManagerPlugin {
     /**
      * Send sms
-     * @param {SmsOptions} options
+     * @param {SmsSendOptions} options
      * @returns {Promise<any>}
      */
-    send(options: SmsOptions): Promise<any>;
+    send(options: SmsSendOptions): Promise<any>;
 
 }
 
-export interface SmsOptions {
+export interface SmsSendOptions {
 
 }

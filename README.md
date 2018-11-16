@@ -23,14 +23,14 @@ Find the init component of your app, which is in Angular `app.component.ts` and 
 
 ```
 import {registerWebPlugin} from "@capacitor/core";
-import {Sms} from '@byteowls/capacitor-sms';
+import {SmsManager} from '@byteowls/capacitor-sms';
 
 @Component()
 export class AppComponent implements OnInit {
 
     ngOnInit() {
         console.log("Register custom capacitor plugins");
-        registerWebPlugin(Sms);
+        registerWebPlugin(SmsManager);
         // other stuff
     }
 }
@@ -44,10 +44,9 @@ TODO
 
 ### Options
 
-See the `oauth2Options` interface at https://github.com/moberwasserlechner/capacitor-sms/blob/master/src/definitions.ts#L16
+See the `oauth2Options` interface at https://github.com/moberwasserlechner/capacitor-sms/blob/master/src/definitions.ts#L17
 
 **Attention:** For security reasons this plugin does not has a option for the **app secret** because it should **never** be stored in client side code.
-
 
 ## Platform: Android
 
@@ -61,7 +60,7 @@ See the `oauth2Options` interface at https://github.com/moberwasserlechner/capac
         List<Class<? extends Plugin>> additionalPlugins = new ArrayList<>();
         // Additional plugins you've installed go here
         // Ex: additionalPlugins.add(TotallyAwesomePlugin.class);
-        additionalPlugins.add(SmsPlugin.class);
+        additionalPlugins.add(SmsManagerPlugin.class);
 
         // Initializes the Bridge
         this.init(savedInstanceState, additionalPlugins);
