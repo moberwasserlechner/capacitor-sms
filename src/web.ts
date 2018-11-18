@@ -1,5 +1,5 @@
 import {WebPlugin} from '@capacitor/core';
-import {SmsSendOptions, SmsManagerPlugin} from "./definitions";
+import {SmsManagerPlugin, SmsSendOptions} from "./definitions";
 
 export class SmsManagerPluginWeb extends WebPlugin implements SmsManagerPlugin {
 
@@ -10,9 +10,9 @@ export class SmsManagerPluginWeb extends WebPlugin implements SmsManagerPlugin {
         });
     }
 
-    async send(options: SmsSendOptions): Promise<any> {
-        return new Promise<any>((resolve, reject) => {
-            resolve();
+    async send(options: SmsSendOptions): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            reject("PLATFORM_NOT_SUPPORTED");
         });
     }
 
