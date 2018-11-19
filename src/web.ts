@@ -1,7 +1,9 @@
 import {WebPlugin} from '@capacitor/core';
-import {SmsManagerPlugin, SmsSendOptions} from "./definitions";
+import {SmsManagerPlugin, SmsPermissionOptions, SmsSendOptions} from "./definitions";
 
 export class SmsManagerPluginWeb extends WebPlugin implements SmsManagerPlugin {
+
+    NOT_SUPPORTED: string = "PLATFORM_NOT_SUPPORTED";
 
     constructor() {
         super({
@@ -12,7 +14,13 @@ export class SmsManagerPluginWeb extends WebPlugin implements SmsManagerPlugin {
 
     async send(options: SmsSendOptions): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            reject("PLATFORM_NOT_SUPPORTED");
+            reject(this.NOT_SUPPORTED);
+        });
+    }
+
+    async hasPermission(options: SmsPermissionOptions): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            reject(this.NOT_SUPPORTED);
         });
     }
 

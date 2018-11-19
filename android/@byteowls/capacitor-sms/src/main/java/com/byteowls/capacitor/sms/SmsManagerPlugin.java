@@ -23,10 +23,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-@NativePlugin(requestCodes = { SmsManagerPlugin.REQUEST_CODE }, name = "SmsManager")
+@NativePlugin(requestCodes = { SmsManagerPlugin.SEND_REQUEST_CODE, SmsManagerPlugin.PERMISSION_REQUEST_CODE }, name = "SmsManager")
 public class SmsManagerPlugin extends Plugin {
 
-    static final int REQUEST_CODE = 2200;
+    static final int SEND_REQUEST_CODE = 2200;
+    static final int PERMISSION_REQUEST_CODE = 2300;
     static final int INTENT_RESULT_CODE = 2311;
     private static final String PARAM_ANDROID_SUBSCRIPTION_ID = "android.subscriptionId";
     private static final String PARAM_ANDROID_OPEN_SMS_APP = "android.openSmsApp";
@@ -37,6 +38,24 @@ public class SmsManagerPlugin extends Plugin {
     public void send(final PluginCall call) {
         saveCall(call);
         sendSms(call);
+    }
+
+    @PluginMethod()
+    public void hasPermission(final PluginCall call) {
+        saveCall(call);
+        hasPermissionForSms(call);
+    }
+
+    private void hasPermissionForSms(final PluginCall call) {
+        boolean useSmsApp = getCallParam(Boolean.class, call, PARAM_ANDROID_OPEN_SMS_APP, false);
+        if (!useSmsApp) {
+            if (isPermissionGranted(PERMISSION_REQUEST_CODE, Manifest.permission.SEND_SMS)) {
+                call.resolve();
+            }
+        } else {
+            call.resolve();
+        }
+
     }
 
     private void sendSms(final PluginCall call) {
@@ -52,7 +71,7 @@ public class SmsManagerPlugin extends Plugin {
 
                 boolean useSmsApp = getCallParam(Boolean.class, call, PARAM_ANDROID_OPEN_SMS_APP, false);
                 if (!useSmsApp) {
-                    if (isPermissionGranted(REQUEST_CODE, Manifest.permission.SEND_SMS)) {
+                    if (isPermissionGranted(SEND_REQUEST_CODE, Manifest.permission.SEND_SMS)) {
                         if (hasPhoneFeature()) {
                             String subscriptionId = getCallParam(String.class, call, PARAM_ANDROID_SUBSCRIPTION_ID);
                             SmsManager manager;
@@ -156,7 +175,7 @@ public class SmsManagerPlugin extends Plugin {
     @Override
     protected void handleRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.handleRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CODE) {
+        if (requestCode == SEND_REQUEST_CODE || requestCode == PERMISSION_REQUEST_CODE ) {
             final PluginCall savedCall = getSavedCall();
             if (savedCall == null) {
                 return;
@@ -171,7 +190,12 @@ public class SmsManagerPlugin extends Plugin {
                     return;
                 }
             }
-            sendSms(savedCall);
+
+            if (PERMISSION_REQUEST_CODE == requestCode) {
+                hasPermissionForSms(savedCall);
+            } else {
+                sendSms(savedCall);
+            }
         }
     }
 

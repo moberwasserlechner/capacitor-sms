@@ -12,6 +12,13 @@ export interface SmsManagerPlugin {
      */
     send(options: SmsSendOptions): Promise<void>;
 
+    /**
+     * Check the permission for sending sms. If the permission is not true we try to request them.
+     * @param {SmsPermissionOptions} options
+     * @returns {Promise<void>}
+     */
+    hasPermission(options: SmsPermissionOptions): Promise<void>;
+
 }
 
 export interface SmsSendOptions {
@@ -29,4 +36,8 @@ export interface SmsSendOptions {
          */
         openSmsApp?: boolean;
     }
+}
+
+export interface SmsPermissionOptions {
+    openSmsApp?: boolean;
 }
