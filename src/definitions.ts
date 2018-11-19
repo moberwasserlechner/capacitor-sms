@@ -39,5 +39,7 @@ export interface SmsSendOptions {
 }
 
 export interface SmsPermissionOptions {
-    openSmsApp?: boolean;
+    android?: {
+        openSmsApp?: boolean;
+    }
 }

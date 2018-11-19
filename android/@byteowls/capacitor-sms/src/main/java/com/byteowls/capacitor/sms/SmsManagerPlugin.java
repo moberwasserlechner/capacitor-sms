@@ -151,17 +151,16 @@ public class SmsManagerPlugin extends Plugin {
                         }
                     }
                 } else {
-                    Intent smsIntent = new Intent(Intent.ACTION_SEND);
-
-                    // See http://stackoverflow.com/questions/7242190/sending-sms-using-intent-does-not-add-recipients-on-some-devices
-                    smsIntent.setData(Uri.parse("smsto:" + phoneNumber));  // This ensures only SMS apps respond
-                    smsIntent.putExtra("address", phoneNumber);
+                    Intent smsIntent = new Intent(Intent.ACTION_VIEW);
                     smsIntent.putExtra("sms_body", smsMessage.getText());
+                    // See http://stackoverflow.com/questions/7242190/sending-sms-using-intent-does-not-add-recipients-on-some-devices
+                    smsIntent.putExtra("address", phoneNumber);
+                    smsIntent.setData(Uri.parse("smsto:" + Uri.encode(phoneNumber)));
+
                     if (smsIntent.resolveActivity(getContext().getPackageManager()) != null) {
                         startActivityForResult(call, smsIntent, INTENT_RESULT_CODE);
                     } else {
-                        String msg = "@byteowls/capacitor-sms: No app for " + smsIntent.getAction();
-                        Log.e(getLogTag(), msg);
+                        Log.e(getLogTag(), "@byteowls/capacitor-sms: No app for " + smsIntent.getAction());
                         call.reject("NO_SMS_APP_FOUND");
                     }
                 }
