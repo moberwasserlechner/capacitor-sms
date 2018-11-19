@@ -40,8 +40,6 @@ public class SmsManagerPlugin extends Plugin {
     }
 
     private void sendSms(final PluginCall call) {
-        if (hasPhoneFeature()) {
-
             SmsMessage smsMessage = getSmsMessage(call);
             if (smsMessage != null && smsMessage.getText() != null) {
 
@@ -55,78 +53,82 @@ public class SmsManagerPlugin extends Plugin {
                 boolean useSmsApp = getCallParam(Boolean.class, call, PARAM_ANDROID_OPEN_SMS_APP, false);
                 if (!useSmsApp) {
                     if (isPermissionGranted(REQUEST_CODE, Manifest.permission.SEND_SMS)) {
-                        String subscriptionId = getCallParam(String.class, call, PARAM_ANDROID_SUBSCRIPTION_ID);
-                        SmsManager manager;
-                        if (subscriptionId == null || subscriptionId.isEmpty() || Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1) {
-                            manager = SmsManager.getDefault();
-                        } else {
-                            manager = SmsManager.getSmsManagerForSubscriptionId(Integer.valueOf(subscriptionId));
-                        }
-
-                        final ArrayList<String> textParts = manager.divideMessage(smsMessage.getText());
-
-                        // by creating this broadcast receiver we can check whether or not the SMS was sent
-                        final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-                            int partsCount = textParts.size(); //number of parts to send
-
-                            @Override
-                            public void onReceive(Context context, Intent intent) {
-                                String error = null;
-                                switch (getResultCode()) {
-                                    case SmsManager.STATUS_ON_ICC_SENT:
-                                    case Activity.RESULT_OK:
-                                        break;
-                                    case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-                                        error = "ERROR_GENERIC_FAILURE";
-                                        break;
-                                    case SmsManager.RESULT_ERROR_NO_SERVICE:
-                                        error = "ERROR_NO_SERVICE";
-                                        break;
-                                    case SmsManager.RESULT_ERROR_NULL_PDU:
-                                        error = "ERROR_NULL_PDU";
-                                        break;
-                                    case SmsManager.RESULT_ERROR_RADIO_OFF:
-                                        error = "ERROR_RADIO_OFF";
-                                        break;
-                                }
-                                // trigger the callback only when all the parts have been sent
-                                partsCount--;
-                                if (partsCount == 0) {
-                                    if (error != null) {
-                                        call.reject(error);
-                                    } else {
-                                        call.resolve();
-                                    }
-                                    getActivity().unregisterReceiver(this);
-                                }
-                            }
-                        };
-
-                        // randomize the intent filter action to avoid using the same receiver
-                        String intentFilterAction = "SMS_SENT" + java.util.UUID.randomUUID().toString();
-                        getActivity().registerReceiver(broadcastReceiver, new IntentFilter(intentFilterAction));
-
-                        PendingIntent sentIntent = PendingIntent.getBroadcast(getActivity(), 0, new Intent(intentFilterAction), 0);
-
-                        try {
-
-                            if (textParts.size() > 1) {
-                                ArrayList<PendingIntent> sentIntents = new ArrayList<>();
-                                for (int i = 0; i < textParts.size(); i++) {
-                                    sentIntents.add(sentIntent);
-                                }
-                                manager.sendMultipartTextMessage(phoneNumber, null, textParts, sentIntents, null);
-
+                        if (hasPhoneFeature()) {
+                            String subscriptionId = getCallParam(String.class, call, PARAM_ANDROID_SUBSCRIPTION_ID);
+                            SmsManager manager;
+                            if (subscriptionId == null || subscriptionId.isEmpty() || Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1) {
+                                manager = SmsManager.getDefault();
                             } else {
-                                manager.sendTextMessage(phoneNumber,
-                                    null,
-                                    textParts.get(0),
-                                    sentIntent,
-                                    null);
+                                manager = SmsManager.getSmsManagerForSubscriptionId(Integer.valueOf(subscriptionId));
                             }
-                        } catch (SecurityException e) {
-                            Log.e(getLogTag(), "@byteowls/capacitor-sms: unexpected security exception", e);
-                            call.reject("UNKNOWN_ERROR");
+
+                            final ArrayList<String> textParts = manager.divideMessage(smsMessage.getText());
+
+                            // by creating this broadcast receiver we can check whether or not the SMS was sent
+                            final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+                                int partsCount = textParts.size(); //number of parts to send
+
+                                @Override
+                                public void onReceive(Context context, Intent intent) {
+                                    String error = null;
+                                    switch (getResultCode()) {
+                                        case SmsManager.STATUS_ON_ICC_SENT:
+                                        case Activity.RESULT_OK:
+                                            break;
+                                        case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
+                                            error = "ERROR_GENERIC_FAILURE";
+                                            break;
+                                        case SmsManager.RESULT_ERROR_NO_SERVICE:
+                                            error = "ERROR_NO_SERVICE";
+                                            break;
+                                        case SmsManager.RESULT_ERROR_NULL_PDU:
+                                            error = "ERROR_NULL_PDU";
+                                            break;
+                                        case SmsManager.RESULT_ERROR_RADIO_OFF:
+                                            error = "ERROR_RADIO_OFF";
+                                            break;
+                                    }
+                                    // trigger the callback only when all the parts have been sent
+                                    partsCount--;
+                                    if (partsCount == 0) {
+                                        if (error != null) {
+                                            call.reject(error);
+                                        } else {
+                                            call.resolve();
+                                        }
+                                        getActivity().unregisterReceiver(this);
+                                    }
+                                }
+                            };
+
+                            // randomize the intent filter action to avoid using the same receiver
+                            String intentFilterAction = "SMS_SENT" + java.util.UUID.randomUUID().toString();
+                            getActivity().registerReceiver(broadcastReceiver, new IntentFilter(intentFilterAction));
+
+                            PendingIntent sentIntent = PendingIntent.getBroadcast(getActivity(), 0, new Intent(intentFilterAction), 0);
+
+                            try {
+
+                                if (textParts.size() > 1) {
+                                    ArrayList<PendingIntent> sentIntents = new ArrayList<>();
+                                    for (int i = 0; i < textParts.size(); i++) {
+                                        sentIntents.add(sentIntent);
+                                    }
+                                    manager.sendMultipartTextMessage(phoneNumber, null, textParts, sentIntents, null);
+
+                                } else {
+                                    manager.sendTextMessage(phoneNumber,
+                                        null,
+                                        textParts.get(0),
+                                        sentIntent,
+                                        null);
+                                }
+                            } catch (SecurityException e) {
+                                Log.e(getLogTag(), "@byteowls/capacitor-sms: unexpected security exception", e);
+                                call.reject("UNKNOWN_ERROR");
+                            }
+                        } else {
+                            call.reject("TELEPHONY_NOT_SUPPORTED");
                         }
                     }
                 } else {
@@ -148,9 +150,6 @@ public class SmsManagerPlugin extends Plugin {
                 Log.e(getLogTag(), "Both number and text of a sms message are required!");
                 call.reject("INVALID_SMS");
             }
-        } else {
-            call.reject("TELEPHONY_NOT_SUPPORTED");
-        }
 
     }
 
@@ -178,10 +177,8 @@ public class SmsManagerPlugin extends Plugin {
 
     private boolean isPermissionGranted(int permissionRequestCode, String permission) {
         if (hasPermission(permission)) {
-            Log.v(getLogTag(),"Permission '" + permission + "' is granted");
             return true;
         } else {
-            Log.v(getLogTag(),"Permission '" + permission + "' denied. Asking user for it.");
             pluginRequestPermission(permission, permissionRequestCode);
             return false;
         }
