@@ -39,29 +39,27 @@ export class AppComponent implements OnInit {
 ### Use it
 
 ```typescript
-const openSmsApp = false;
-Plugins.SmsManager.hasPermission({
-    android: {
-      openSmsApp: openSmsApp
-    }
-}).then(() => {
-    for (const m of recipients) {
-        Plugins.SmsManager.send({
-            numbers: [m.number],
-            text: [m.text],
-            android: {
-                openSmsApp: openSmsApp
-            }
-        }).then(() => {
-            console.log("Success");
-        });
-        }).catch(reason => {
-            console.log("Failed to send. Reason: " + reason.message);
-        });
-    }
-}).catch(reason => {
-    console.log("No permssions given!");
-});
+    Plugins.SmsManager.hasPermission({
+        android: {
+          openSmsApp: false
+        }
+    }).then(() => {
+        for (const m of recipients) {
+            Plugins.SmsManager.send({
+                numbers: [m.number],
+                text: [m.text],
+                android: {
+                    openSmsApp: false
+                }
+            }).then(() => {
+                console.log("Successfully sent!");
+            }).catch(reason => {
+                console.log("Failed to send! Reason: " + reason.message);
+            });
+        }
+    }).catch(reason => {
+        console.log("No permssions given!");
+    });
 ```
 
 ## Platform: Android
