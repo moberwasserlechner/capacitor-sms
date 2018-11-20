@@ -39,14 +39,30 @@ export class AppComponent implements OnInit {
 ### Use it
 
 ```typescript
-TODO
+const openSmsApp = false;
+Plugins.SmsManager.hasPermission({
+    android: {
+      openSmsApp: openSmsApp
+    }
+}).then(() => {
+    for (const m of recipients) {
+        Plugins.SmsManager.send({
+            numbers: [m.number],
+            text: [m.text],
+            android: {
+                openSmsApp: openSmsApp
+            }
+        }).then(() => {
+            console.log("Success");
+        });
+        }).catch(reason => {
+            console.log("Failed to send. Reason: " + reason.message);
+        });
+    }
+}).catch(reason => {
+    console.log("No permssions given!");
+});
 ```
-
-### Options
-
-See the `oauth2Options` interface at https://github.com/moberwasserlechner/capacitor-sms/blob/master/src/definitions.ts#L17
-
-**Attention:** For security reasons this plugin does not has a option for the **app secret** because it should **never** be stored in client side code.
 
 ## Platform: Android
 
