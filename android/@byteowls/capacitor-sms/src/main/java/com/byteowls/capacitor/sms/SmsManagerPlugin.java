@@ -220,24 +220,6 @@ public class SmsManagerPlugin extends Plugin {
         return getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY);
     }
 
-//    private List<SmsMessage> getSmsMessages(PluginCall call) {
-//        List<SmsMessage> result = new ArrayList<>();
-//
-//        JSArray messageArray = call.getArray(PARAM_MESSAGES);
-//
-//        try {
-//            List<JSONObject> messagesJSON = messageArray.toList();
-//            for (JSONObject jsonMessage : messagesJSON) {
-//                JSObject jsObject = JSObject.fromJSONObject(jsonMessage);
-//                SmsMessage smsMessage = new SmsMessage(jsObject.getString("number"), jsObject.getString("text"));
-//                result.add(smsMessage);
-//            }
-//        } catch (JSONException e) {
-//            call.error("Provided notification format is invalid");
-//        }
-//        return result;
-//    }
-
     private <T> T getCallParam(Class<T> clazz, PluginCall call, String key) {
         return getCallParam(clazz, call, key, null);
     }
