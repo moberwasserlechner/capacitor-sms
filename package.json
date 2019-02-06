@@ -1,6 +1,6 @@
 {
     "name": "@byteowls/capacitor-sms",
-    "version": "1.0.0-alpha.16",
+    "version": "1.0.0-alpha.17",
     "description": "Capacitor SMS plugin",
     "author": "Michael Oberwasserlechner",
     "homepage": "https://github.com/moberwasserlechner/capacitor-sms",
@@ -11,6 +11,8 @@
         "build": "npm run clean && tsc",
         "clean": "rm -rf ./dist",
         "watch": "tsc --watch",
+        "removePacked": "rm -f byteowls-capacitor-sms-*.tgz",
+        "publishLocally": "npm run removePacked && npm run build && npm pack",
         "prepublishOnly": "npm run build"
     },
     "files": [
@@ -38,7 +40,7 @@
         "access": "public"
     },
     "peerDependencies": {
-        "@capacitor/core": ">= 1.0.0-beta.11"
+        "@capacitor/core": "^1.0.0-beta.11"
     },
     "devDependencies": {
         "@capacitor/core": "1.0.0-beta.17",
