@@ -13,13 +13,11 @@ import android.os.Build;
 import android.telephony.SmsManager;
 import android.util.Log;
 import com.getcapacitor.JSArray;
-import com.getcapacitor.JSObject;
 import com.getcapacitor.NativePlugin;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -47,7 +45,7 @@ public class SmsManagerPlugin extends Plugin {
     }
 
     private void hasPermissionForSms(final PluginCall call) {
-        boolean useSmsApp = getCallParam(Boolean.class, call, PARAM_ANDROID_OPEN_SMS_APP, false);
+        boolean useSmsApp = ConfigUtils.getCallParam(Boolean.class, call, PARAM_ANDROID_OPEN_SMS_APP, false);
         if (!useSmsApp) {
             if (isPermissionGranted(PERMISSION_REQUEST_CODE, Manifest.permission.SEND_SMS)) {
                 call.resolve();
@@ -69,11 +67,11 @@ public class SmsManagerPlugin extends Plugin {
                 }
                 String phoneNumber = smsMessage.getJoinedNumbers(separator);
 
-                boolean useSmsApp = getCallParam(Boolean.class, call, PARAM_ANDROID_OPEN_SMS_APP, false);
+                boolean useSmsApp = ConfigUtils.getCallParam(Boolean.class, call, PARAM_ANDROID_OPEN_SMS_APP, false);
                 if (!useSmsApp) {
                     if (isPermissionGranted(SEND_REQUEST_CODE, Manifest.permission.SEND_SMS)) {
                         if (hasPhoneFeature()) {
-                            String subscriptionId = getCallParam(String.class, call, PARAM_ANDROID_SUBSCRIPTION_ID);
+                            String subscriptionId = ConfigUtils.getCallParam(String.class, call, PARAM_ANDROID_SUBSCRIPTION_ID);
                             SmsManager manager;
                             if (subscriptionId == null || subscriptionId.isEmpty() || Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP_MR1) {
                                 manager = SmsManager.getDefault();
@@ -210,7 +208,7 @@ public class SmsManagerPlugin extends Plugin {
     private SmsMessage getSmsMessage(PluginCall call) {
         try {
             JSArray numberArray = call.getArray("numbers");
-            String text = getCallParam(String.class, call, "text");
+            String text = ConfigUtils.getCallParam(String.class, call, "text");
             return new SmsMessage(numberArray.<String>toList(), text);
         } catch (JSONException ignore) {}
         return null;
@@ -220,55 +218,6 @@ public class SmsManagerPlugin extends Plugin {
         return getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY);
     }
 
-    private <T> T getCallParam(Class<T> clazz, PluginCall call, String key) {
-        return getCallParam(clazz, call, key, null);
-    }
 
-    private <T> T getCallParam(Class<T> clazz, PluginCall call, String key, T defaultValue) {
-        String k = getDeepestKey(key);
-        try {
-            JSONObject o = getDeepestObject(call.getData(), key);
-
-            Object value = null;
-            if (clazz.isAssignableFrom(String.class)) {
-                value = o.getString(k);
-            } else if (clazz.isAssignableFrom(Boolean.class)) {
-                value = o.getBoolean(k);
-            } else if (clazz.isAssignableFrom(Double.class)) {
-                value = o.getDouble(k);
-            } else if (clazz.isAssignableFrom(Integer.class)) {
-                value = o.getInt(k);
-            } else if (clazz.isAssignableFrom(Float.class)) {
-                Double doubleValue = o.getDouble(k);
-                value = doubleValue.floatValue();
-            } else if (clazz.isAssignableFrom(Integer.class)) {
-                value = o.getInt(k);
-            }
-            if (value == null) {
-                return defaultValue;
-            }
-            return (T) value;
-        } catch (Exception ignore) {}
-        return defaultValue;
-    }
-
-    private String getDeepestKey(String key) {
-        String[] parts = key.split("\\.");
-        if (parts.length > 0) {
-            return parts[parts.length - 1];
-        }
-        return null;
-    }
-
-    private JSObject getDeepestObject(JSObject o, String key) {
-        // Split on periods
-        String[] parts = key.split("\\.");
-        // Search until the second to last part of the key
-        for (int i = 0; i < parts.length-1; i++) {
-            String k = parts[i];
-            o = o.getJSObject(k);
-        }
-        return o;
-    }
 
 }
