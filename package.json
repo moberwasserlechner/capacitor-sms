@@ -1,6 +1,6 @@
 {
     "name": "@byteowls/capacitor-sms",
-    "version": "1.0.0-alpha.15",
+    "version": "1.0.0-alpha.16",
     "description": "Capacitor SMS plugin",
     "author": "Michael Oberwasserlechner",
     "homepage": "https://github.com/moberwasserlechner/capacitor-sms",
@@ -37,10 +37,11 @@
     "publishConfig": {
         "access": "public"
     },
-    "dependencies": {
-        "@capacitor/core": "1.0.0-beta.11"
+    "peerDependencies": {
+        "@capacitor/core": ">= 1.0.0-beta.11"
     },
     "devDependencies": {
+        "@capacitor/core": "1.0.0-beta.17",
         "typescript": "2.9.1"
     }
 }
