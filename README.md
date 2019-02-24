@@ -5,7 +5,7 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/michaelowl_web.svg?style=social&label=Follow&style=flat-square)](https://twitter.com/michaelowl_web)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/moberwasserlechner)
 
-This is plugin for sending short messages using the devices features.
+This is plugin for sending short messages using the devices SMS app.
 
 ## Installation
 
@@ -38,29 +38,33 @@ export class AppComponent implements OnInit {
 
 ### Use it
 
+This plugin always uses the default sms app.
+
+Google prevented me from using SMS_SEND permission so I dropped the support
+here because the plugin is much easier to maintain if only one feature is supported.
+
 ```typescript
-    Plugins.SmsManager.hasPermission({
-        android: {
-          openSmsApp: false
+      for (const m of messages) {
+        const numbers: string[] = [];
+        for (const r of m.recipients) {
+          numbers.push(r.mobile);
         }
-    }).then(() => {
-        for (const m of recipients) {
-            Plugins.SmsManager.send({
-                numbers: [m.number],
-                text: [m.text],
-                android: {
-                    openSmsApp: false
-                }
-            }).then(() => {
-                console.log("Successfully sent!");
-            }).catch(reason => {
-                console.log("Failed to send! Reason: " + reason.message);
-            });
-        }
-    }).catch(reason => {
-        console.log("No permssions given!");
-    });
+        Plugins.SmsManager.send({
+          numbers: numbers,
+          text: m.content,
+        }).then(() => {
+          // SMS app was opened
+        }).catch(error => {
+          // A error occured. See error codes below
+        });
+      }
 ```
+
+### Error Codes
+
+ERR_PLATFORM_NOT_SUPPORTED ... Sending SMS on the web is not supported.
+ERR_INVALID_SMS ... Either text or numbers was not given in the options
+ERR_NO_SMS_APP ... This plugin only supports sending SMS over the devices SMS app
 
 ## Platform: Android
 
@@ -83,7 +87,7 @@ export class AppComponent implements OnInit {
 
 ## Platform: iOS
 
-- Not supported yet
+- ETA: Q1 2019
 
 ## Platform: Web/PWA
 
