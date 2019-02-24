@@ -62,9 +62,9 @@ here because the plugin is much easier to maintain if only one feature is suppor
 
 ### Error Codes
 
-ERR_PLATFORM_NOT_SUPPORTED ... Sending SMS on the web is not supported.
-ERR_INVALID_SMS ... Either text or numbers was not given in the options
-ERR_NO_SMS_APP ... This plugin only supports sending SMS over the devices SMS app
+* ERR_PLATFORM_NOT_SUPPORTED ... Sending SMS on the web is not supported.
+* ERR_INVALID_SMS ... Either text or numbers was not given in the options
+* ERR_NO_SMS_APP ... This plugin only supports sending SMS over the devices SMS app
 
 ## Platform: Android
 
