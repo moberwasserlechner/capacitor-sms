@@ -87,7 +87,7 @@ here because the plugin is much easier to maintain if only one feature is suppor
 
 ## Platform: iOS
 
-- ETA: Q1 2019
+- On iOS the plugin is registered automatically by Capacitor.
 
 ## Platform: Web/PWA
 
