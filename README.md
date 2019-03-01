@@ -60,11 +60,15 @@ here because the plugin is much easier to maintain if only one feature is suppor
       }
 ```
 
-### Error Codes
+### Reject Codes
 
+* SEND_CANCELLED ... User cancelled or closed the SMS app.
 * ERR_PLATFORM_NOT_SUPPORTED ... Sending SMS on the web is not supported.
-* ERR_INVALID_SMS ... Either text or numbers was not given in the options
-* ERR_NO_SMS_APP ... This plugin only supports sending SMS over the devices SMS app
+* ERR_SEND_FAILED ... The SMS app returned that sending the message to the recipients failed.
+* ERR_SEND_UNKNOWN_STATE ... The SMS app returned a unknown state. There is nothing I can do to clarify the error.
+* ERR_NO_NUMBERS ... No recipient numbers were retrieved from options. Make sure to deliver only valid numbers, because the whole sending will fail.
+* ERR_NO_TEXT ... No message text was retrieved from options.
+* ERR_SERVICE_NOTFOUND ... The used device can not send SMS. 
 
 ## Platform: Android
 

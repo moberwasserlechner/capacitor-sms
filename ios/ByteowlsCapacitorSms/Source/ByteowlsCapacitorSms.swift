@@ -22,7 +22,7 @@ public class SmsManagerPlugin: CAPPlugin, MFMessageComposeViewControllerDelegate
         case MessageComposeResult.sent.rawValue:
             self.pluginCall!.success()
         default:
-            self.pluginCall!.reject("ERR_SEND_UNKOWN_STATE")
+            self.pluginCall!.reject("ERR_SEND_UNKNOWN_STATE")
         }
         controller.dismiss(animated: true, completion: nil)
     }
@@ -39,7 +39,7 @@ public class SmsManagerPlugin: CAPPlugin, MFMessageComposeViewControllerDelegate
         }
         
         if !MFMessageComposeViewController.canSendText() {
-            call.reject("ERR_SMS_SERVICE_NOTFOUND")
+            call.reject("ERR_SERVICE_NOTFOUND")
             return
         }
         
