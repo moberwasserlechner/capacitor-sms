@@ -2,7 +2,6 @@ package com.byteowls.capacitor.sms;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import com.getcapacitor.JSArray;
 import com.getcapacitor.NativePlugin;
 import com.getcapacitor.Plugin;
@@ -10,12 +9,15 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import org.json.JSONException;
 
+import java.util.List;
+
 @NativePlugin(requestCodes = { SmsManagerPlugin.SMS_INTENT_REQUEST_CODE }, name = "SmsManager")
 public class SmsManagerPlugin extends Plugin {
 
     static final int SMS_INTENT_REQUEST_CODE = 2311;
-    private static final String ERR_INVALID_SMS = "ERR_INVALID_SMS";
-    private static final String ERR_NO_SMS_APP = "ERR_NO_SMS_APP";
+    private static final String ERR_SERVICE_NOTFOUND = "ERR_SERVICE_NOTFOUND";
+    private static final String ERR_NO_NUMBERS = "ERR_NO_NUMBERS";
+    private static final String ERR_NO_TEXT = "ERR_NO_TEXT";
 
     public SmsManagerPlugin() {}
 
@@ -26,31 +28,40 @@ public class SmsManagerPlugin extends Plugin {
     }
 
     private void sendSms(final PluginCall call) {
-        SmsMessage smsMessage = getSmsMessage(call);
-        if (smsMessage != null && smsMessage.getText() != null) {
+        JSArray numberArray = call.getArray("numbers");
+        List<String> recipientNumbers = null;
+        try {
+            recipientNumbers = numberArray.toList();
+        } catch (JSONException ignore) {}
 
-            String separator = ";";
-            if (android.os.Build.MANUFACTURER.equalsIgnoreCase("Samsung")) {
-                // See http://stackoverflow.com/questions/18974898/send-sms-through-intent-to-multiple-phone-numbers/18975676#18975676
-                separator = ",";
-            }
-            String phoneNumber = smsMessage.getJoinedNumbers(separator);
+        if (recipientNumbers == null || recipientNumbers.isEmpty()) {
+            call.reject(ERR_NO_NUMBERS);
+            return;
+        }
+        String text = ConfigUtils.getCallParam(String.class, call, "text");
+        if (text == null || text.length() == 0) {
+            call.reject(ERR_NO_TEXT);
+            return;
+        }
 
-            Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-            smsIntent.putExtra("sms_body", smsMessage.getText());
-            // See http://stackoverflow.com/questions/7242190/sending-sms-using-intent-does-not-add-recipients-on-some-devices
-            smsIntent.putExtra("address", phoneNumber);
-            smsIntent.setData(Uri.parse("smsto:" + Uri.encode(phoneNumber)));
 
-            if (smsIntent.resolveActivity(getContext().getPackageManager()) != null) {
-                startActivityForResult(call, smsIntent, SMS_INTENT_REQUEST_CODE);
-            } else {
-                Log.e(getLogTag(), ERR_NO_SMS_APP + ": Intent action: " + smsIntent.getAction());
-                call.reject(ERR_NO_SMS_APP);
-            }
+        String separator = ";";
+        if (android.os.Build.MANUFACTURER.equalsIgnoreCase("Samsung")) {
+            // See http://stackoverflow.com/questions/18974898/send-sms-through-intent-to-multiple-phone-numbers/18975676#18975676
+            separator = ",";
+        }
+        String phoneNumber = getJoinedNumbers(recipientNumbers, separator);
+
+        Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+        smsIntent.putExtra("sms_body", text);
+        // See http://stackoverflow.com/questions/7242190/sending-sms-using-intent-does-not-add-recipients-on-some-devices
+        smsIntent.putExtra("address", phoneNumber);
+        smsIntent.setData(Uri.parse("smsto:" + Uri.encode(phoneNumber)));
+
+        if (smsIntent.resolveActivity(getContext().getPackageManager()) != null) {
+            startActivityForResult(call, smsIntent, SMS_INTENT_REQUEST_CODE);
         } else {
-            Log.e(getLogTag(), ERR_INVALID_SMS + ": Both number and text of a sms message are required!");
-            call.reject(ERR_INVALID_SMS);
+            call.reject(ERR_SERVICE_NOTFOUND);
         }
 
     }
@@ -64,13 +75,15 @@ public class SmsManagerPlugin extends Plugin {
         super.handleOnActivityResult(requestCode, resultCode, data);
     }
 
-    private SmsMessage getSmsMessage(PluginCall call) {
-        try {
-            JSArray numberArray = call.getArray("numbers");
-            String text = ConfigUtils.getCallParam(String.class, call, "text");
-            return new SmsMessage(numberArray.<String>toList(), text);
-        } catch (JSONException ignore) {}
-        return null;
+    private String getJoinedNumbers(List<String>numbers, String separator) {
+        StringBuilder joined = new StringBuilder();
+        for (int i = 0; i < numbers.size(); i++) {
+            if (i > 0) {
+                joined.append(separator);
+            }
+            joined.append(numbers.get(i));
+        }
+        return joined.toString();
     }
 
 }
