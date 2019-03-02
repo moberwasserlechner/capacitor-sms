@@ -5,7 +5,7 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/michaelowl_web.svg?style=social&label=Follow&style=flat-square)](https://twitter.com/michaelowl_web)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/moberwasserlechner)
 
-This is plugin for sending short messages using the devices SMS app.
+Plugin for sending short messages using the device's SMS app.
 
 ## Installation
 
