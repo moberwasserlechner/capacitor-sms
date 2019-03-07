@@ -1,6 +1,6 @@
 {
     "name": "@byteowls/capacitor-sms",
-    "version": "1.0.0-beta.1",
+    "version": "1.0.0-beta.2",
     "description": "Capacitor SMS plugin",
     "author": "Michael Oberwasserlechner",
     "homepage": "https://github.com/moberwasserlechner/capacitor-sms",
