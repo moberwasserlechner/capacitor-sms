@@ -6,7 +6,6 @@ target 'ByteowlsCapacitorSms' do
   use_frameworks!
 
   # Pods for ByteowlsCapacitorSms
-
-   pod 'Capacitor', '~> 1.0.0-beta.16'
+  pod 'Capacitor', :path => '../node_modules/@capacitor/ios'
 
 end
