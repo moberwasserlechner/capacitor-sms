@@ -23,3 +23,7 @@ export class SmsManagerPluginWeb extends WebPlugin implements SmsManagerPlugin {
 const SmsManager = new SmsManagerPluginWeb();
 
 export { SmsManager };
+
+// this does not work for angular. You need to register the plugin in app.component.ts again.
+import { registerWebPlugin } from '@capacitor/core';
+registerWebPlugin(SmsManager);

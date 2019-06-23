@@ -1,7 +1,5 @@
 package com.byteowls.capacitor.sms;
 
-import com.getcapacitor.plugin.SplashScreen;
-
 import java.util.List;
 
 /**
