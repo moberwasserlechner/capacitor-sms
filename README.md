@@ -11,6 +11,8 @@ Plugin for sending short messages using the device's SMS app.
 
 `npm i @byteowls/capacitor-sms`
 
+Minimum Capacitor version is **1.0.0**
+
 ## Configuration
 
 This example shows the common process of configuring this plugin.
