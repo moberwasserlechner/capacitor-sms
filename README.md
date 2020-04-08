@@ -11,7 +11,7 @@ Plugin for sending short messages using the device's SMS app.
 
 `npm i @byteowls/capacitor-sms`
 
-Minimum Capacitor version is **1.0.0**
+Minimum Capacitor version is **2.0.0**
 
 ## Configuration
 
@@ -74,7 +74,7 @@ here because the plugin is much easier to maintain if only one feature is suppor
 * ERR_PLATFORM_NOT_SUPPORTED ... Sending SMS on the web is not supported.
 * ERR_NO_NUMBERS ... No recipient numbers were retrieved from options. Make sure to deliver only valid numbers, because the whole sending will fail.
 * ERR_NO_TEXT ... No message text was retrieved from options.
-* ERR_SERVICE_NOTFOUND ... The used device can not send SMS. 
+* ERR_SERVICE_NOTFOUND ... The used device can not send SMS.
 
 ## Platform: Android
 
