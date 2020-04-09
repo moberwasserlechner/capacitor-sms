@@ -6,12 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Breaking
-- Capacitor 2.x is new minimum peer dependency
-- Android
- - Migrate to AndroidX
+## [2.0.0] - 2020-04-09
 
-## [1.0.0] - 2020-06-23
+### Breaking
+- Capacitor 2.x is new minimum peer dependency!
+
+## [1.0.0] - 2019-06-23
 
 ### Breaking
 -  Capacitor 1.x is new minimum peer dependency
