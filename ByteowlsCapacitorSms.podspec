@@ -14,5 +14,5 @@ require 'json'
     s.dependency 'Capacitor'
     s.source = { :git => 'https://github.com/moberwasserlechner/capacitor-sms', :tag => s.version.to_s }
     s.source_files = 'ios/ByteowlsCapacitorSms/Source/*.{swift,h,m}'
-    s.swift_version = '4.2'
+    s.swift_version = '5.0'
   end
