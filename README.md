@@ -88,7 +88,7 @@ here because the plugin is much easier to maintain if only one feature is suppor
         List<Class<? extends Plugin>> additionalPlugins = new ArrayList<>();
         // Additional plugins you've installed go here
         // Ex: additionalPlugins.add(TotallyAwesomePlugin.class);
-        additionalPlugins.add(SmsManagerPlugin.class);
+        additionalPlugins.add(com.byteowls.capacitor.sms.SmsManagerPlugin.class);
 
         // Initializes the Bridge
         this.init(savedInstanceState, additionalPlugins);
