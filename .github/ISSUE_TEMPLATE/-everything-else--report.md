@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 <!--
-Only issues using a template are accepted!
+ATTENTION: Only issues using a filled template will be accepted!
 -->
 
 ### Description
@@ -30,7 +30,7 @@ Replace this with the commands output
 - 1.0.0
 - other: (Please fill in the version you are using.)
 
-## Your Plugin Configuration
+### Your Plugin Configuration
 <!-- Without secret stuff (of course). -->
 
 ```typescript
