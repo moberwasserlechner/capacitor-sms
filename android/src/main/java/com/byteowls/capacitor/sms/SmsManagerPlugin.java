@@ -3,18 +3,20 @@ package com.byteowls.capacitor.sms;
 import android.content.Intent;
 import android.net.Uri;
 import com.getcapacitor.JSArray;
-import com.getcapacitor.NativePlugin;
+import com.getcapacitor.annotation.CapacitorPlugin;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import org.json.JSONException;
+import androidx.activity.result.ActivityResult;
+import com.getcapacitor.annotation.ActivityCallback;
 
 import java.util.List;
 
-@NativePlugin(requestCodes = { SmsManagerPlugin.SMS_INTENT_REQUEST_CODE }, name = "SmsManager")
+@CapacitorPlugin(
+    name = "SmsManager"
+)
 public class SmsManagerPlugin extends Plugin {
-
-    static final int SMS_INTENT_REQUEST_CODE = 2311;
     private static final String ERR_SERVICE_NOTFOUND = "ERR_SERVICE_NOTFOUND";
     private static final String ERR_NO_NUMBERS = "ERR_NO_NUMBERS";
     private static final String ERR_NO_TEXT = "ERR_NO_TEXT";
@@ -23,7 +25,6 @@ public class SmsManagerPlugin extends Plugin {
 
     @PluginMethod()
     public void send(final PluginCall call) {
-        saveCall(call);
         sendSms(call);
     }
 
@@ -59,20 +60,16 @@ public class SmsManagerPlugin extends Plugin {
         smsIntent.setData(Uri.parse("smsto:" + Uri.encode(phoneNumber)));
 
         if (smsIntent.resolveActivity(getContext().getPackageManager()) != null) {
-            startActivityForResult(call, smsIntent, SMS_INTENT_REQUEST_CODE);
+            startActivityForResult(call, smsIntent, "onSmsRequestResult");
         } else {
             call.reject(ERR_SERVICE_NOTFOUND);
         }
 
     }
 
-    @Override
-    protected void handleOnActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == SMS_INTENT_REQUEST_CODE) {
-            PluginCall savedCall = getSavedCall();
-            savedCall.resolve();
-        }
-        super.handleOnActivityResult(requestCode, resultCode, data);
+    @ActivityCallback
+    private void onSmsRequestResult(PluginCall call, ActivityResult result) {
+        call.resolve();
     }
 
     private String getJoinedNumbers(List<String>numbers, String separator) {
