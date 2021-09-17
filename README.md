@@ -11,32 +11,16 @@ Plugin for sending short messages using the device's SMS app.
 
 `npm i @byteowls/capacitor-sms`
 
-Minimum Capacitor version is **2.0.0**
+Minimum Capacitor version is **3.0.0**
+
+### Capacitor 2.x
+`npm i @byteowls/capacitor-sms@2`
 
 ## Configuration
 
 This example shows the common process of configuring this plugin.
 
 Although it was taken from a Angular 6 application, it should work in other frameworks as well.
-
-### Register plugin
-
-Find the init component of your app, which is in Angular `app.component.ts` and register this plugin by
-
-```
-import {registerWebPlugin} from "@capacitor/core";
-import {SmsManager} from '@byteowls/capacitor-sms';
-
-@Component()
-export class AppComponent implements OnInit {
-
-    ngOnInit() {
-        console.log("Register custom capacitor plugins");
-        registerWebPlugin(SmsManager);
-        // other stuff
-    }
-}
-```
 
 ### Use it
 
@@ -81,17 +65,17 @@ here because the plugin is much easier to maintain if only one feature is suppor
 **Register the plugin** in `com.companyname.appname.MainActivity#onCreate`
 
 ```
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        List<Class<? extends Plugin>> additionalPlugins = new ArrayList<>();
-        // Additional plugins you've installed go here
-        // Ex: additionalPlugins.add(TotallyAwesomePlugin.class);
-        additionalPlugins.add(com.byteowls.capacitor.sms.SmsManagerPlugin.class);
-
-        // Initializes the Bridge
-        this.init(savedInstanceState, additionalPlugins);
+    ...
+    import com.byteowls.capacitor.sms.SmsManagerPlugin;
+    ...
+    public class MainActivity extends BridgeActivity {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            ...
+            registerPlugin(SmsManagerPlugin.class);
+            ...
+        }
     }
 ```
 
