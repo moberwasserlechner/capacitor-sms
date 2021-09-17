@@ -6,21 +6,21 @@ typealias JSObject = [String:Any]
 
 @objc(SmsManagerPlugin)
 public class SmsManagerPlugin: CAPPlugin, MFMessageComposeViewControllerDelegate {
-    
+
     let PARAM_NUMBERS = "numbers"
     let PARAM_TEXT = "text"
-    
+
     var pluginCall: CAPPluginCall?
-    
+
     public func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-       
+
         switch (result.rawValue) {
         case MessageComposeResult.cancelled.rawValue:
             self.pluginCall!.reject("SEND_CANCELLED")
         case MessageComposeResult.failed.rawValue:
             self.pluginCall!.reject("ERR_SEND_FAILED")
         case MessageComposeResult.sent.rawValue:
-            self.pluginCall!.success()
+            self.pluginCall!.resolve()
         default:
             self.pluginCall!.reject("ERR_SEND_UNKNOWN_STATE")
         }
@@ -37,12 +37,12 @@ public class SmsManagerPlugin: CAPPlugin, MFMessageComposeViewControllerDelegate
             call.reject("ERR_NO_TEXT")
             return
         }
-        
+
         if !MFMessageComposeViewController.canSendText() {
             call.reject("ERR_SERVICE_NOTFOUND")
             return
         }
-        
+
         let composeVC = MFMessageComposeViewController()
         composeVC.messageComposeDelegate = self
         // Configure the fields of the interface.
@@ -51,7 +51,7 @@ public class SmsManagerPlugin: CAPPlugin, MFMessageComposeViewControllerDelegate
         // Present the view controller modally.
         DispatchQueue.main.async {
             // Update UI
-            self.bridge.viewController.present(composeVC, animated: true, completion: nil);
+            self.bridge?.viewController?.present(composeVC, animated: true, completion: nil);
         }
     }
 }
