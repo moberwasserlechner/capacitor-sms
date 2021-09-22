@@ -10,9 +10,9 @@ require 'json'
     s.license = package['license']
     s.homepage = package['homepage']
     s.author = package['author']
-    s.ios.deployment_target  = '11.0'
+    s.ios.deployment_target  = '12.0'
     s.dependency 'Capacitor'
     s.source = { :git => 'https://github.com/moberwasserlechner/capacitor-sms', :tag => s.version.to_s }
     s.source_files = 'ios/ByteowlsCapacitorSms/Source/*.{swift,h,m}'
-    s.swift_version = '5.0'
+    s.swift_version = '5.1'
   end
