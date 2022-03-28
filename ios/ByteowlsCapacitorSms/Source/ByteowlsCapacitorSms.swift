@@ -43,13 +43,13 @@ public class SmsManagerPlugin: CAPPlugin, MFMessageComposeViewControllerDelegate
             return
         }
 
-        let composeVC = MFMessageComposeViewController()
-        composeVC.messageComposeDelegate = self
-        // Configure the fields of the interface.
-        composeVC.recipients = numbers
-        composeVC.body = text
         // Present the view controller modally.
         DispatchQueue.main.async {
+            let composeVC = MFMessageComposeViewController()
+            composeVC.messageComposeDelegate = self
+            // Configure the fields of the interface.
+            composeVC.recipients = numbers
+            composeVC.body = text
             // Update UI
             self.bridge?.viewController?.present(composeVC, animated: true, completion: nil);
         }
