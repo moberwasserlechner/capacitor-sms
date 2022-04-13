@@ -25,9 +25,9 @@ npx cap sync
 
 | Plugin | For Capacitor         | Docs                            | Notes                          |
 |--------|-------------------|---------------------------------|--------------------------------|
-| 3.x    | 3.x.x             | [README](./README.md)           | Breaking changes see Changelog. XCode 12.0 needs this version  |
-| 2.x    | 2.x.x             | [README](/tree/2.0.0/README.md) | Breaking changes see Changelog. XCode 11.4 needs this version  |
-| 1.x    | 1.x.x             | [README](/tree/1.0.0/README.md) |                                |
+| 3.x    | 3.x.x             | [README](https://github.com/moberwasserlechner/capacitor-sms/README.md)           | Breaking changes see Changelog. XCode 12.0 needs this version  |
+| 2.x    | 2.x.x             | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/2.0.0/README.md) | Breaking changes see Changelog. XCode 11.4 needs this version  |
+| 1.x    | 1.x.x             | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/1.0.0/README.md) |                                |
 
 ## Sponsors
 

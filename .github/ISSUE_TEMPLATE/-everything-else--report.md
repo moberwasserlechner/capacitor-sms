@@ -26,7 +26,7 @@ Replace this with the commands output
 ### Library version:
 <!-- Please remove all items that are not relevant. -->
 
-- 3.0.0
+- 3.0.1
 - 2.0.0
 - other: (Please fill in the version you are using.)
 
