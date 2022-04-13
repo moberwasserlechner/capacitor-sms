@@ -1,53 +1,85 @@
 # Capacitor SMS plugin
 
-[![npm](https://img.shields.io/npm/v/@byteowls/capacitor-sms.svg)](https://www.npmjs.com/package/@byteowls/capacitor-sms)
-[![npm](https://img.shields.io/npm/dt/@byteowls/capacitor-sms.svg?label=npm%20downloads)](https://www.npmjs.com/package/@byteowls/capacitor-sms)
-[![Twitter Follow](https://img.shields.io/twitter/follow/michaelowl_web.svg?style=social&label=Follow&style=flat-square)](https://twitter.com/michaelowl_web)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/moberwasserlechner)
+<a href="#sponsors"><img src="https://img.shields.io/badge/plugin-Sponsors-blue?style=flat-square" /></a>
+<a href="https://www.npmjs.com/package/@byteowls/capacitor-sms"><img src="https://img.shields.io/npm/dw/@byteowls/capacitor-sms?style=flat-square" /></a>
+<a href="https://www.npmjs.com/package/@byteowls/capacitor-sms"><img src="https://img.shields.io/npm/v/@byteowls/capacitor-sms?style=flat-square" /></a>
+<a href="LICENSE"><img src="https://img.shields.io/npm/l/@byteowls/capacitor-sms?style=flat-square" /></a>
 
 Plugin for sending short messages using the device's SMS app.
 
 ## Installation
 
-`npm i @byteowls/capacitor-sms`
+For Capacitor v3
+```bash
+npm i @byteowls/capacitor-sms
+npx cap sync
+```
 
-Minimum Capacitor version is **3.0.0**
+For Capacitor v2 use `2.0.0`
+```bash
+npm i @byteowls/capacitor-sms@2.0.0
+npx cap sync
+```
 
-### Capacitor 2.x
-`npm i @byteowls/capacitor-sms@2`
+## Versions
+
+| Plugin | For Capacitor         | Docs                            | Notes                          |
+|--------|-------------------|---------------------------------|--------------------------------|
+| 3.x    | 3.x.x             | [README](./README.md)           | Breaking changes see Changelog. XCode 12.0 needs this version  |
+| 2.x    | 2.x.x             | [README](/tree/2.0.0/README.md) | Breaking changes see Changelog. XCode 11.4 needs this version  |
+| 1.x    | 1.x.x             | [README](/tree/1.0.0/README.md) |                                |
+
+## Sponsors
+
+I would like to especially thank some people and companies for supporting my work on this plugin and therefore improving it for everybody.
+
+*
+
+## Maintainers
+
+| Maintainer | GitHub | Consulting                                   |
+| -----------| -------|----------------------------------------------|
+| Michael Oberwasserlechner | [moberwasserlechner](https://github.com/moberwasserlechner) | [https://byteowls.com](https://byteowls.com) |
+
 
 ## Configuration
 
-This example shows the common process of configuring this plugin.
-
-Although it was taken from a Angular 6 application, it should work in other frameworks as well.
-
-### Use it
+Starting with version `3.0.0`, the plugin is registered automatically on all platforms.
 
 This plugin always uses the default sms app.
 
-Google prevented me from using SMS_SEND permission so I dropped the support
-here because the plugin is much easier to maintain if only one feature is supported.
+### Use it
 
 ```typescript
-      for (const m of messages) {
-        const numbers: string[] = [];
-        for (const r of m.recipients) {
-          numbers.push(r.mobile);
-        }
-        Plugins.SmsManager.send({
-          numbers: numbers,
-          text: m.content,
+import {Component, OnInit} from '@angular/core';
+import {SmsManager} from "@byteowls/capacitor-sms";
+import {Device, DeviceInfo} from "@capacitor/device";
+
+
+@Component({
+    template: "<button mat-raised-button color='primary' (click)='sendSms()'>Send SMS now!</button>"
+})
+export class SmsExampleComponent implements OnInit {
+
+    iosOrAndroid: boolean;
+
+    async ngOnInit() {
+        const info: DeviceInfo = await Device.getInfo();
+        this.iosOrAndroid = (info.platform === "android" || info.platform === "ios");
+    }
+
+    sendSms() {
+        const numbers: string[] = ["+43 123 123123123", "+43 4564 56456456"];
+        SmsManager.send({
+            numbers: numbers,
+            text: "This is a example SMS",
         }).then(() => {
-          // SMS app was opened
+            // success
         }).catch(error => {
-            // see error codes below
-            if (error.message !== "SEND_CANCELLED") {
-                // show toast with error message
-                console.log(error.message);
-            }
+            console.error(error);
         });
-      }
+    }
+}
 ```
 
 ### Error Codes
@@ -62,26 +94,15 @@ here because the plugin is much easier to maintain if only one feature is suppor
 
 ## Platform: Android
 
-**Register the plugin** in `com.companyname.appname.MainActivity#onCreate`
+Prerequisite: [Capacitor Android Docs](https://capacitor.ionicframework.com/docs/android/configuration)
 
-```
-    ...
-    import com.byteowls.capacitor.sms.SmsManagerPlugin;
-    ...
-    public class MainActivity extends BridgeActivity {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            ...
-            registerPlugin(SmsManagerPlugin.class);
-            ...
-        }
-    }
-```
+### Register plugin
+On Android the plugin is registered **automatically** by Capacitor.
 
 ## Platform: iOS
 
-- On iOS the plugin is registered automatically by Capacitor.
+### Register plugin
+On iOS the plugin is registered **automatically** by Capacitor.
 
 ## Platform: Web/PWA
 
@@ -92,13 +113,20 @@ here because the plugin is much easier to maintain if only one feature is suppor
 - Not supported.
 
 ## Contribute
+See [Contribution Guidelines](./.github/CONTRIBUTING.md).
 
-See [Contribution Guidelines](https://github.com/moberwasserlechner/capacitor-sms/blob/master/.github/CONTRIBUTING.md).
+## Changelog
+See [CHANGELOG](./CHANGELOG.md).
 
 ## License
-
-MIT. Please see [LICENSE](https://github.com/moberwasserlechner/capacitor-sms/blob/master/LICENSE).
+MIT. Please see [LICENSE](./LICENSE).
 
 ## BYTEOWLS Software & Consulting
 
-This plugin is powered by [BYTEOWLS Software & Consulting](https://byteowls.com) and was build for [Team Conductor](https://team-conductor.com/en/) - Next generation club management platform.
+This plugin is powered by [BYTEOWLS Software & Consulting](https://byteowls.com).
+
+If you need extended support for this project like critical changes or releases ahead of schedule. Feel free to contact us for a consulting offer.
+
+## Disclaimer
+
+We have no business relation to Ionic.

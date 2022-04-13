@@ -19,8 +19,6 @@ ATTENTION: Only issues using a filled template will be accepted!
 
 - Android
 - iOS
-- Electron
-- Web
 
 ### Describe Preferred Solution
 <!-- A clear and concise description of what you want to happen. -->

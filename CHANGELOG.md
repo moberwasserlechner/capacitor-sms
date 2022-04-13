@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2022-04-13
+
+### Changed
+
+- Upgrade to support Capacitor 3.x - [#12](/pull/12), [#11](/issues/11) ... thx [@chrum](https://github.com/chrum)
+- Fix thread access - [#13](/pull/13), [#9](/issues/9)... thx [@chrum](https://github.com/chrum)
+
+### Breaking
+- Capacitor 3.x is new minimum peer dependency!
+
 ## [2.0.0] - 2020-04-09
 
 ### Breaking
@@ -29,7 +39,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Breaking
 - This plugin will not support Android's background sending features as Google recently change their policy on sending SMS limiting the permission to only a few usecases. See https://play.google.com/about/privacy-security-deception/permissions/ for details.
 
-[Unreleased]: https://github.com/moberwasserlechner/capacitor-sms/compare/2.0.0..master
+[Unreleased]: https://github.com/moberwasserlechner/capacitor-sms/compare/3.0.0..main
+[3.0.0]: https://github.com/moberwasserlechner/capacitor-sms/compare/2.0.0..3.0.0
 [2.0.0]: https://github.com/moberwasserlechner/capacitor-sms/compare/1.0.0..2.0.0
 [1.0.0]: https://github.com/moberwasserlechner/capacitor-sms/compare/1.0.0-beta.2..1.0.0
 [1.0.0-beta.2]: https://github.com/moberwasserlechner/capacitor-sms/compare/1.0.0-beta.1..1.0.0-beta.2
