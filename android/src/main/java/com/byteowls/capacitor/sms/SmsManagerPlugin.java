@@ -10,6 +10,7 @@ import com.getcapacitor.PluginMethod;
 import org.json.JSONException;
 import androidx.activity.result.ActivityResult;
 import com.getcapacitor.annotation.ActivityCallback;
+import android.content.ActivityNotFoundException;
 
 import java.util.List;
 
@@ -59,12 +60,11 @@ public class SmsManagerPlugin extends Plugin {
         smsIntent.putExtra("address", phoneNumber);
         smsIntent.setData(Uri.parse("smsto:" + Uri.encode(phoneNumber)));
 
-        if (smsIntent.resolveActivity(getContext().getPackageManager()) != null) {
+        try {
             startActivityForResult(call, smsIntent, "onSmsRequestResult");
-        } else {
+        } catch (ActivityNotFoundException e) {
             call.reject(ERR_SERVICE_NOTFOUND);
         }
-
     }
 
     @ActivityCallback
