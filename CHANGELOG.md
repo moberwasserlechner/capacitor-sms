@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.2] - 2022-05-02
+
+### Fixes
+* Error service not found - [#14](https://github.com/moberwasserlechner/capacitor-sms/issues/14)
+
 ## [3.0.1] - 2022-04-13
 
 ### Fixes
@@ -44,7 +49,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Breaking
 - This plugin will not support Android's background sending features as Google recently change their policy on sending SMS limiting the permission to only a few usecases. See https://play.google.com/about/privacy-security-deception/permissions/ for details.
 
-[Unreleased]: https://github.com/moberwasserlechner/capacitor-sms/compare/3.0.1..main
+[Unreleased]: https://github.com/moberwasserlechner/capacitor-sms/compare/3.0.2..main
+[3.0.2]: https://github.com/moberwasserlechner/capacitor-sms/compare/3.0.1..3.0.2
 [3.0.1]: https://github.com/moberwasserlechner/capacitor-sms/compare/3.0.0..3.0.1
 [3.0.0]: https://github.com/moberwasserlechner/capacitor-sms/compare/2.0.0..3.0.0
 [2.0.0]: https://github.com/moberwasserlechner/capacitor-sms/compare/1.0.0..2.0.0
