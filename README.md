@@ -15,7 +15,7 @@ npm i @byteowls/capacitor-sms
 npx cap sync
 ```
 
-For Capacitor v3
+For Capacitor v3 use `3.0.2`
 ```bash
 npm i @byteowls/capacitor-sms@3.0.2
 npx cap sync
@@ -31,9 +31,9 @@ npx cap sync
 
 | Plugin | For Capacitor | Docs                                                                               | Notes                          |
 |--------|---------------|------------------------------------------------------------------------------------|--------------------------------|
-| 4.x    | 4.x.x         | [README](./README.md)                                                              | Breaking changes see Changelog. XCode 12.0 needs this version  |
-| 3.x    | 3.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/3.0.2/README.md) | Breaking changes see Changelog. XCode 12.0 needs this version  |
-| 2.x    | 2.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/2.0.0/README.md) | Breaking changes see Changelog. XCode 11.4 needs this version  |
+| 4.x    | 4.x.x         | [README](./README.md)                                                              | Breaking changes see Changelog. |
+| 3.x    | 3.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/3.0.2/README.md) | Breaking changes see Changelog. XCode 12.0 needs this version |
+| 2.x    | 2.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/2.0.0/README.md) | Breaking changes see Changelog. XCode 11.4 needs this version |
 | 1.x    | 1.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/1.0.0/README.md) |                                |
 
 ## Sponsors
