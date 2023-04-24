@@ -18,7 +18,6 @@ buildscript {
 apply plugin: 'com.android.library'
 
 android {
-    namespace 'com.byteowls.capacitor.sms'
     compileSdkVersion project.hasProperty('compileSdkVersion') ? rootProject.ext.compileSdkVersion : 32
     defaultConfig {
         minSdkVersion project.hasProperty('minSdkVersion') ? rootProject.ext.minSdkVersion : 22
