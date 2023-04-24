@@ -45,12 +45,12 @@
         "access": "public"
     },
     "peerDependencies": {
-        "@capacitor/core": ">=4"
+        "@capacitor/core": ">=5"
     },
     "devDependencies": {
-        "@capacitor/core": "4.2.0",
-        "@capacitor/ios": "4.2.0",
-        "@capacitor/android": "4.2.0",
+        "@capacitor/core": "next",
+        "@capacitor/ios": "next",
+        "@capacitor/android": "next",
         "typescript": "^4.0.3"
     }
 }
