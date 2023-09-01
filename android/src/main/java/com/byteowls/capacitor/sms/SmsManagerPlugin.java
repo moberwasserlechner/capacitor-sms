@@ -1,5 +1,6 @@
 package com.byteowls.capacitor.sms;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import com.getcapacitor.JSArray;
@@ -69,7 +70,11 @@ public class SmsManagerPlugin extends Plugin {
 
     @ActivityCallback
     private void onSmsRequestResult(PluginCall call, ActivityResult result) {
-        call.resolve();
+        if (result.getResultCode() == Activity.RESULT_CANCELED) {
+            call.reject("SEND_CANCELLED");
+        } else {
+            call.resolve();
+        }
     }
 
     private String getJoinedNumbers(List<String>numbers, String separator) {

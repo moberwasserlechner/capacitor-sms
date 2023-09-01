@@ -91,7 +91,7 @@ export class SmsExampleComponent implements OnInit {
 
 ### Error Codes
 
-* SEND_CANCELLED ... User cancelled or closed the SMS app. (ios only)
+* SEND_CANCELLED ... User cancelled or closed the SMS app.
 * ERR_SEND_FAILED ... The SMS app returned that sending the message to the recipients failed. (ios only)
 * ERR_SEND_UNKNOWN_STATE ... The SMS app returned a unknown state. There is nothing I can do to clarify the error. (ios only)
 * ERR_PLATFORM_NOT_SUPPORTED ... Sending SMS on the web is not supported.
