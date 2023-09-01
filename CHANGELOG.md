@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.0] - TBD
+
+### Breaking
+- Capacitor 5.x is new minimum peer dependency!
+- Web throws `UNIMPLEMENTED` code instead of `ERR_PLATFORM_NOT_SUPPORTED`.
+
 ## [4.0.0] - 2022-09-18
 
 ### Breaking

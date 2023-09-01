@@ -1,9 +1,3 @@
-declare global {
-    interface PluginRegistry {
-        SmsManager?: SmsManagerPlugin;
-    }
-}
-
 export interface SmsManagerPlugin {
     /**
      * Send the sms

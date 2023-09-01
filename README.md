@@ -9,9 +9,15 @@ Plugin for sending short messages using the device's SMS app.
 
 ## Installation
 
-For Capacitor v4
+For Capacitor v5
 ```bash
 npm i @byteowls/capacitor-sms
+npx cap sync
+```
+
+For Capacitor v4 use `4.0.0`
+```bash
+npm i @byteowls/capacitor-sms@4
 npx cap sync
 ```
 
@@ -31,7 +37,8 @@ npx cap sync
 
 | Plugin | For Capacitor | Docs                                                                               | Notes                          |
 |--------|---------------|------------------------------------------------------------------------------------|--------------------------------|
-| 4.x    | 4.x.x         | [README](./README.md)                                                              | Breaking changes see Changelog. |
+| 5.x    | 5.x.x         | [README](./README.md)                                                              | Breaking changes see Changelog. |
+| 4.x    | 4.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/4.0.0/README.md)                                                              | Breaking changes see Changelog. |
 | 3.x    | 3.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/3.0.2/README.md) | Breaking changes see Changelog. XCode 12.0 needs this version |
 | 2.x    | 2.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/2.0.0/README.md) | Breaking changes see Changelog. XCode 11.4 needs this version |
 | 1.x    | 1.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/1.0.0/README.md) |                                |
@@ -60,7 +67,6 @@ This plugin always uses the default sms app.
 ```typescript
 import {Component, OnInit} from '@angular/core';
 import {SmsManager} from "@byteowls/capacitor-sms";
-import {Device, DeviceInfo} from "@capacitor/device";
 
 
 @Component({
@@ -68,11 +74,8 @@ import {Device, DeviceInfo} from "@capacitor/device";
 })
 export class SmsExampleComponent implements OnInit {
 
-    iosOrAndroid: boolean;
-
     async ngOnInit() {
         const info: DeviceInfo = await Device.getInfo();
-        this.iosOrAndroid = (info.platform === "android" || info.platform === "ios");
     }
 
     sendSms() {
@@ -94,7 +97,7 @@ export class SmsExampleComponent implements OnInit {
 * SEND_CANCELLED ... User cancelled or closed the SMS app. (ios only)
 * ERR_SEND_FAILED ... The SMS app returned that sending the message to the recipients failed. (ios only)
 * ERR_SEND_UNKNOWN_STATE ... The SMS app returned a unknown state. There is nothing I can do to clarify the error. (ios only)
-* ERR_PLATFORM_NOT_SUPPORTED ... Sending SMS on the web is not supported.
+* UNIMPLEMENTED ... Sending SMS on the web is not supported.
 * ERR_NO_NUMBERS ... No recipient numbers were retrieved from options. Make sure to deliver only valid numbers, because the whole sending will fail.
 * ERR_NO_TEXT ... No message text was retrieved from options.
 * ERR_SERVICE_NOTFOUND ... The used device can not send SMS.
