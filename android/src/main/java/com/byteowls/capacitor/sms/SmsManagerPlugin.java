@@ -12,6 +12,7 @@ import org.json.JSONException;
 import androidx.activity.result.ActivityResult;
 import com.getcapacitor.annotation.ActivityCallback;
 import android.content.ActivityNotFoundException;
+import android.util.Log;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ import java.util.List;
     name = "SmsManager"
 )
 public class SmsManagerPlugin extends Plugin {
+    private static final String BASE_LOG_TAG = "com.byteowls.sms";
     private static final String ERR_SERVICE_NOTFOUND = "ERR_SERVICE_NOTFOUND";
     private static final String ERR_NO_NUMBERS = "ERR_NO_NUMBERS";
     private static final String ERR_NO_TEXT = "ERR_NO_TEXT";
@@ -36,7 +38,9 @@ public class SmsManagerPlugin extends Plugin {
         List<String> recipientNumbers = null;
         try {
             recipientNumbers = numberArray.toList();
-        } catch (JSONException ignore) {}
+        } catch (JSONException e) {
+            Log.e(getLogTag(BASE_LOG_TAG), "'numbers' json structure not parsable", e);
+        }
 
         if (recipientNumbers == null || recipientNumbers.isEmpty()) {
             call.reject(ERR_NO_NUMBERS);
@@ -65,6 +69,7 @@ public class SmsManagerPlugin extends Plugin {
         try {
             startActivityForResult(call, smsIntent, "onSmsRequestResult");
         } catch (ActivityNotFoundException e) {
+            Log.e(getLogTag(BASE_LOG_TAG), "Activity not startable!", e);
             call.reject(ERR_SERVICE_NOTFOUND);
         }
     }
