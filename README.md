@@ -15,21 +15,15 @@ npm i @byteowls/capacitor-sms
 npx cap sync
 ```
 
-For Capacitor v4 use `4.0.0`
+For Capacitor v4
 ```bash
 npm i @byteowls/capacitor-sms@4
 npx cap sync
 ```
 
-For Capacitor v3 use `3.0.2`
+For Capacitor v3
 ```bash
-npm i @byteowls/capacitor-sms@3.0.2
-npx cap sync
-```
-
-For Capacitor v2 use `2.0.0`
-```bash
-npm i @byteowls/capacitor-sms@2.0.0
+npm i @byteowls/capacitor-sms@3
 npx cap sync
 ```
 
@@ -38,7 +32,7 @@ npx cap sync
 | Plugin | For Capacitor | Docs                                                                               | Notes                          |
 |--------|---------------|------------------------------------------------------------------------------------|--------------------------------|
 | 5.x    | 5.x.x         | [README](./README.md)                                                              | Breaking changes see Changelog. |
-| 4.x    | 4.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/4.0.0/README.md)                                                              | Breaking changes see Changelog. |
+| 4.x    | 4.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/4.0.0/README.md) | Breaking changes see Changelog. |
 | 3.x    | 3.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/3.0.2/README.md) | Breaking changes see Changelog. XCode 12.0 needs this version |
 | 2.x    | 2.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/2.0.0/README.md) | Breaking changes see Changelog. XCode 11.4 needs this version |
 | 1.x    | 1.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/1.0.0/README.md) |                                |
@@ -130,12 +124,6 @@ See [CHANGELOG](./CHANGELOG.md).
 
 ## License
 MIT. Please see [LICENSE](./LICENSE).
-
-## BYTEOWLS Software & Consulting
-
-This plugin is powered by [BYTEOWLS Software & Consulting](https://byteowls.com).
-
-If you need extended support for this project like critical changes or releases ahead of schedule. Feel free to contact us for a consulting offer.
 
 ## Disclaimer
 
