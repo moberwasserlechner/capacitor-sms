@@ -60,11 +60,9 @@ public class SmsManagerPlugin extends Plugin {
         }
         String phoneNumber = getJoinedNumbers(recipientNumbers, separator);
 
-        Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-        smsIntent.putExtra("sms_body", text);
-        // See http://stackoverflow.com/questions/7242190/sending-sms-using-intent-does-not-add-recipients-on-some-devices
-        smsIntent.putExtra("address", phoneNumber);
+        Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
         smsIntent.setData(Uri.parse("smsto:" + Uri.encode(phoneNumber)));
+        smsIntent.putExtra("sms_body", text);
 
         try {
             startActivityForResult(call, smsIntent, "onSmsRequestResult");
