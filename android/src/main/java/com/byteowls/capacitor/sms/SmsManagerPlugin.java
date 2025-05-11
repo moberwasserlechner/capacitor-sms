@@ -67,19 +67,11 @@ public class SmsManagerPlugin extends Plugin {
         smsIntent.setData(Uri.parse("smsto:" + Uri.encode(phoneNumber)));
 
         try {
-            startActivityForResult(call, smsIntent, "onSmsRequestResult");
+            getActivity().startActivity(smsIntent);
+            call.resolve();
         } catch (ActivityNotFoundException e) {
             Log.e(getLogTag(BASE_LOG_TAG), "Activity not startable!", e);
             call.reject(ERR_SERVICE_NOTFOUND);
-        }
-    }
-
-    @ActivityCallback
-    private void onSmsRequestResult(PluginCall call, ActivityResult result) {
-        if (result.getResultCode() == Activity.RESULT_CANCELED) {
-            call.reject(SEND_CANCELLED);
-        } else {
-            call.resolve();
         }
     }
 

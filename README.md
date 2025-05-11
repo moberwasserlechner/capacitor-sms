@@ -67,12 +67,16 @@ export class SmsExampleComponent implements OnInit {
 ### Error Codes
 
 * SEND_CANCELLED ... User cancelled or closed the SMS app.
-* ERR_SEND_FAILED ... The SMS app returned that sending the message to the recipients failed. (ios only)
+* ERR_SEND_FAILED ... (iOS only) The SMS app returned that sending the message to the recipients failed. (ios only)
 * ERR_SEND_UNKNOWN_STATE ... The SMS app returned a unknown state. There is nothing I can do to clarify the error. (ios only)
 * UNIMPLEMENTED ... Sending SMS on the web is not supported.
 * ERR_NO_NUMBERS ... No recipient numbers were retrieved from options. Make sure to deliver only valid numbers, because the whole sending will fail.
 * ERR_NO_TEXT ... No message text was retrieved from options.
 * ERR_SERVICE_NOTFOUND ... The used device can not send SMS.
+
+> ⚠️ On Android 10 and above, messaging apps no longer return a result.
+> The plugin will resolve the promise immediately after opening the SMS app.
+> Error codes like `SEND_CANCELLED` are only available on iOS.
 
 ## Contribute
 See [Contribution Guidelines](./.github/CONTRIBUTING.md).
