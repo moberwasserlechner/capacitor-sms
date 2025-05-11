@@ -42,7 +42,7 @@ public class SmsManagerPlugin extends Plugin {
             Log.e(getLogTag(BASE_LOG_TAG), "'numbers' json structure not parsable", e);
         }
 
-        if (recipientNumbers == null || recipientNumbers.isEmpty()) {
+        if (recipientNumbers == null) {
             call.reject(ERR_NO_NUMBERS);
             return;
         }
