@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/maintenance/yes/2024?style=flat-square" />
+    <img src="https://img.shields.io/maintenance/yes/2025?style=flat-square" />
     <a href="LICENSE"><img src="https://img.shields.io/npm/l/@byteowls/capacitor-sms?style=flat-square" /></a>
 <br>
     <a href="https://www.npmjs.com/package/@byteowls/capacitor-sms"><img src="https://img.shields.io/npm/dw/@byteowls/capacitor-sms?style=flat-square" /></a>
@@ -29,9 +29,8 @@ npx cap sync
 
 | Plugin | For Capacitor | Docs                                                                               | Notes                                                         |
 |--------|---------------|------------------------------------------------------------------------------------|---------------------------------------------------------------|
-| 6.x    | 6.x.x         | [README](./README.md)                                                              | Breaking changes see Changelog.                               |
-| 5.x    | 5.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/5.0.0/README.md) | Breaking changes see Changelog.                               |
-| 4.x    | 4.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/4.0.0/README.md) | Breaking changes see Changelog.                               |
+| 7.x    | 7.x.x         | [README](./README.md)                                                              | Breaking changes see Changelog.                               |
+| 6.x    | 6.x.x         | [README](https://github.com/moberwasserlechner/capacitor-sms/blob/6.0.0/README.md) | Breaking changes see Changelog.                               |
 
 
 ## Configuration

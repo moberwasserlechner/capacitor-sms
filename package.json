@@ -1,57 +1,57 @@
 {
-    "name": "@byteowls/capacitor-sms",
-    "version": "6.0.0",
-    "description": "Capacitor SMS plugin",
-    "author": "Michael Oberwasserlechner",
-    "homepage": "https://github.com/moberwasserlechner/capacitor-sms",
-    "license": "MIT",
-    "main": "dist/esm/index.js",
-    "types": "dist/esm/index.d.ts",
-    "scripts": {
-        "build": "npm run clean && tsc",
-        "clean": "rimraf ./dist",
-        "watch": "tsc --watch",
-        "removePacked": "rimraf -g byteowls-capacitor-sms-*.tgz",
-        "publishLocally": "npm run removePacked && npm run build && npm pack",
-        "prepublishOnly": "npm run build"
+  "name": "@byteowls/capacitor-sms",
+  "version": "7.0.0",
+  "description": "Capacitor SMS plugin",
+  "author": "Michael Oberwasserlechner",
+  "homepage": "https://github.com/moberwasserlechner/capacitor-sms",
+  "license": "MIT",
+  "main": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "scripts": {
+    "build": "npm run clean && tsc",
+    "clean": "rimraf ./dist",
+    "watch": "tsc --watch",
+    "removePacked": "rimraf -g byteowls-capacitor-sms-*.tgz",
+    "publishLocally": "npm run removePacked && npm run build && npm pack",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist/",
+    "ios/",
+    "android/",
+    "ByteowlsCapacitorSms.podspec"
+  ],
+  "keywords": [
+    "capacitor",
+    "capacitor-plugin",
+    "sms"
+  ],
+  "capacitor": {
+    "ios": {
+      "src": "ios"
     },
-    "files": [
-        "dist/",
-        "ios/",
-        "android/",
-        "ByteowlsCapacitorSms.podspec"
-    ],
-    "keywords": [
-        "capacitor",
-        "capacitor-plugin",
-        "sms"
-    ],
-    "capacitor": {
-        "ios": {
-            "src": "ios"
-        },
-        "android": {
-            "src": "android"
-        }
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/moberwasserlechner/capacitor-sms"
-    },
-    "bugs": {
-        "url": "https://github.com/moberwasserlechner/capacitor-sms/issues"
-    },
-    "publishConfig": {
-        "access": "public"
-    },
-    "peerDependencies": {
-        "@capacitor/core": ">=6"
-    },
-    "devDependencies": {
-        "@capacitor/core": "6.1.1",
-        "@capacitor/ios": "6.1.1",
-        "@capacitor/android": "6.1.1",
-        "rimraf": "6.0.1",
-        "typescript": "5.5.4"
+    "android": {
+      "src": "android"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moberwasserlechner/capacitor-sms"
+  },
+  "bugs": {
+    "url": "https://github.com/moberwasserlechner/capacitor-sms/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@capacitor/core": ">=7.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/core": "7.4.2",
+    "@capacitor/ios": "7.4.2",
+    "@capacitor/android": "7.4.2",
+    "rimraf": "6.0.1",
+    "typescript": "5.8.3"
+  }
 }
