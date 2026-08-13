@@ -7,7 +7,7 @@
  */
 
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
@@ -29,6 +29,15 @@ function androidSdkPath() {
 }
 
 try {
+  const packOutput = execFileSync('npm', ['pack', '--json', '--pack-destination', workspace], {
+    cwd: root,
+    encoding: 'utf8',
+  });
+  const tarball = join(workspace, JSON.parse(packOutput)[0].filename);
+  const packedPlugin = join(workspace, 'package');
+  mkdirSync(packedPlugin);
+  execFileSync('tar', ['-xzf', tarball, '-C', packedPlugin, '--strip-components=1']);
+
   writeFileSync(
     join(workspace, 'settings.gradle'),
     `pluginManagement {
@@ -41,7 +50,7 @@ rootProject.name = 'capacitor-sms-consumer'
 include ':capacitor-android'
 project(':capacitor-android').projectDir = new File('${gradlePath(join(root, 'node_modules', '@capacitor', 'android', 'capacitor'))}')
 include ':capacitor-sms'
-project(':capacitor-sms').projectDir = new File('${gradlePath(join(root, 'android'))}')
+project(':capacitor-sms').projectDir = new File('${gradlePath(join(packedPlugin, 'android'))}')
 `,
   );
   writeFileSync(

@@ -20,7 +20,7 @@ Capacitor 8 is the migration boundary for removing CocoaPods. The package ships 
 
 ## Android is implemented in Kotlin
 
-The Capacitor bridge is thin. Input parsing and recipient formatting are plain Kotlin with unit tests. Samsung's comma separator remains supported; other manufacturers use a semicolon. Verification builds Android both standalone and as a subproject of a Capacitor-style host so plugin classpath and property integration are covered.
+The Capacitor bridge is thin. Input parsing and recipient formatting are plain Kotlin with unit tests. Samsung's comma separator remains supported; other manufacturers use a semicolon. Verification builds Android both standalone and from the packed npm artifact as a subproject of a Capacitor-style host, covering the publish allowlist, plugin classpath, and property integration.
 
 ## Web remains unsupported
 
