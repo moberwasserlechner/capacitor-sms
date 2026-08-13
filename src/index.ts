@@ -1,8 +1,9 @@
 import { registerPlugin } from '@capacitor/core';
-import { SmsManagerPlugin } from './definitions';
+
+import type { SmsManagerPlugin } from './definitions';
 
 const SmsManager = registerPlugin<SmsManagerPlugin>('SmsManager', {
-    web: () => import('./web').then(m => new m.SmsManagerPluginWeb()),
+  web: () => import('./web').then(({ SmsManagerPluginWeb }) => new SmsManagerPluginWeb()),
 });
 
 export * from './definitions';

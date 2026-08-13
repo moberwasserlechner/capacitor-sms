@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Breaking
+- Capacitor 8 is now the only supported Capacitor major.
+- iOS distribution uses Swift Package Manager only. CocoaPods consumers must migrate their Capacitor iOS project before upgrading.
+- Android now requires API 24 and Java 21.
+- Renamed `SmsManager.send()` to `SmsManager.compose()` and `SmsSendOptions` to `SmsComposeOptions` to clarify that the plugin opens the platform SMS composer; it does not send messages itself.
+
+### Changed
+- Migrated the Android implementation from Java to Kotlin and added unit tests.
+- Modernized TypeScript builds, package exports, package verification, and CI, including packed Swift target validation and an Android Capacitor-host integration build.
+- Added maintenance, build, license, download, and release badges to the README.
+- Standardized development on pnpm while documenting both pnpm and npm installation.
+- Web remains explicitly unsupported and rejects with `UNIMPLEMENTED`.
+
 ## [7.0.0] - 2025-07-22
 
 ### Breaking
@@ -70,7 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Breaking
 - This plugin will not support Android's background sending features as Google recently change their policy on sending SMS limiting the permission to only a few usecases. See https://play.google.com/about/privacy-security-deception/permissions/ for details.
 
-[Unreleased]: https://github.com/moberwasserlechner/capacitor-sms/compare/7.0.0..main
+[Unreleased]: https://github.com/moberwasserlechner/capacitor-sms/compare/7.0.0..develop
 [7.0.0]: https://github.com/moberwasserlechner/capacitor-sms/compare/6.0.0..7.0.0
 [6.0.0]: https://github.com/moberwasserlechner/capacitor-sms/compare/5.0.0..6.0.0
 [5.0.0]: https://github.com/moberwasserlechner/capacitor-sms/compare/4.0.0..5.0.0

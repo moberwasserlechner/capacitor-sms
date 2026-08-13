@@ -1,39 +1,52 @@
 {
   "name": "@byteowls/capacitor-sms",
-  "version": "7.0.0",
-  "description": "Capacitor SMS plugin",
+  "version": "8.0.0",
+  "description": "Capacitor plugin for composing SMS messages",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "unpkg": "dist/plugin.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "android/src/main/",
+    "android/build.gradle",
+    "dist/index.cjs",
+    "dist/index.cjs.map",
+    "dist/index.d.ts",
+    "dist/index.js",
+    "dist/index.js.map",
+    "dist/plugin.js",
+    "dist/plugin.js.map",
+    "ios/Sources",
+    "Package.swift"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "pnpm clean && tsc && rollup -c rollup.config.mjs",
+    "watch": "tsc --watch",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit && tsc -p tsconfig.test.json",
+    "verify:package": "pnpm build && node scripts/verify-package.mjs",
+    "verify:web": "pnpm lint && pnpm test && pnpm verify:package",
+    "verify:android": "cd android && ./gradlew clean build --no-daemon && cd .. && node scripts/verify-android-consumer.mjs",
+    "verify:ios": "xcodebuild -scheme CapacitorSms -destination 'generic/platform=iOS' build",
+    "verify": "pnpm verify:web && pnpm verify:ios && pnpm verify:android",
+    "removePacked": "rimraf byteowls-capacitor-sms-*.tgz",
+    "publish:locally": "pnpm removePacked && pnpm build && pnpm pack",
+    "prepublishOnly": "pnpm verify"
+  },
   "author": "Michael Oberwasserlechner",
   "homepage": "https://github.com/moberwasserlechner/capacitor-sms",
   "license": "MIT",
-  "main": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
-  "scripts": {
-    "build": "npm run clean && tsc",
-    "clean": "rimraf ./dist",
-    "watch": "tsc --watch",
-    "removePacked": "rimraf -g byteowls-capacitor-sms-*.tgz",
-    "publishLocally": "npm run removePacked && npm run build && npm pack",
-    "prepublishOnly": "npm run build"
-  },
-  "files": [
-    "dist/",
-    "ios/",
-    "android/",
-    "ByteowlsCapacitorSms.podspec"
-  ],
-  "keywords": [
-    "capacitor",
-    "capacitor-plugin",
-    "sms"
-  ],
-  "capacitor": {
-    "ios": {
-      "src": "ios"
-    },
-    "android": {
-      "src": "android"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/moberwasserlechner/capacitor-sms"
@@ -44,14 +57,25 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": ["capacitor", "capacitor-plugin", "sms"],
   "peerDependencies": {
-    "@capacitor/core": ">=7.0.0"
+    "@capacitor/core": ">=8.0.0 <9.0.0"
   },
   "devDependencies": {
-    "@capacitor/core": "7.4.2",
-    "@capacitor/ios": "7.4.2",
-    "@capacitor/android": "7.4.2",
-    "rimraf": "6.0.1",
-    "typescript": "5.8.3"
-  }
+    "@capacitor/android": "8.5.0",
+    "@capacitor/core": "8.5.0",
+    "@capacitor/ios": "8.5.0",
+    "@rollup/plugin-node-resolve": "16.0.3",
+    "@vitest/coverage-v8": "4.1.10",
+    "rimraf": "6.1.3",
+    "rollup": "4.62.4",
+    "rollup-plugin-dts": "6.5.1",
+    "typescript": "6.0.3",
+    "vitest": "4.1.10"
+  },
+  "capacitor": {
+    "ios": { "src": "ios" },
+    "android": { "src": "android" }
+  },
+  "packageManager": "pnpm@10.12.4"
 }
