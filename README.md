@@ -3,14 +3,33 @@
 <p align="center"><strong><code>@byteowls/capacitor-sms</code></strong></p>
 <p align="center">Capacitor plugin for composing SMS messages</p>
 
+<p align="center">
+  <img src="https://img.shields.io/maintenance/yes/2026?style=flat-square" alt="Maintained in 2026" />
+  <a href="https://github.com/moberwasserlechner/capacitor-sms/actions?query=workflow%3ACI"><img src="https://img.shields.io/github/actions/workflow/status/moberwasserlechner/capacitor-sms/ci.yml?style=flat-square" alt="CI status" /></a>
+  <a href="https://github.com/moberwasserlechner/capacitor-sms/actions/workflows/ios.yml"><img src="https://img.shields.io/github/actions/workflow/status/moberwasserlechner/capacitor-sms/ios.yml?style=flat-square&label=iOS" alt="iOS build status" /></a>
+  <a href="https://www.npmjs.com/package/@byteowls/capacitor-sms"><img src="https://img.shields.io/npm/l/@byteowls/capacitor-sms?style=flat-square" alt="npm license" /></a>
+  <br>
+  <a href="https://www.npmjs.com/package/@byteowls/capacitor-sms"><img src="https://img.shields.io/npm/dw/@byteowls/capacitor-sms?style=flat-square" alt="npm weekly downloads" /></a>
+  <a href="https://www.npmjs.com/package/@byteowls/capacitor-sms"><img src="https://img.shields.io/npm/v/@byteowls/capacitor-sms?style=flat-square" alt="npm version" /></a>
+</p>
+
 # Capacitor SMS plugin
 
 Opens the device's native SMS composer with recipients and message text. The user remains responsible for sending the message.
 
 ## Installation
 
+### pnpm (recommended)
+
 ```bash
 pnpm add @byteowls/capacitor-sms
+pnpm exec cap sync
+```
+
+### npm
+
+```bash
+npm install @byteowls/capacitor-sms
 npx cap sync
 ```
 
