@@ -1,5 +1,5 @@
 import XCTest
-@testable import CapacitorSms
+import CapacitorSms
 
 final class CapacitorSmsTests: XCTestCase {
     func testPluginMetadataMatchesJavaScriptRegistration() {

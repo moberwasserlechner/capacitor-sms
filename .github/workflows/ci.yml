@@ -48,6 +48,5 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: gradle
-      - name: Build and test
-        working-directory: android
-        run: ./gradlew clean build --no-daemon
+      - name: Build, test, and verify Capacitor host integration
+        run: pnpm verify:android

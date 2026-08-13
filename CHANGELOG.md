@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Migrated the Android implementation from Java to Kotlin and added unit tests.
-- Modernized TypeScript builds, package exports, package verification, and CI.
+- Modernized TypeScript builds, package exports, package verification, and CI, including packed Swift target validation and an Android Capacitor-host integration build.
 - Added maintenance, build, license, download, and release badges to the README.
 - Standardized development on pnpm while documenting both pnpm and npm installation.
 - Web remains explicitly unsupported and rejects with `UNIMPLEMENTED`.

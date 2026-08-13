@@ -16,11 +16,11 @@ The repository uses pnpm with a committed frozen lockfile. npm is used only for 
 
 ## iOS is distributed through Swift Package Manager only
 
-Capacitor 8 is the migration boundary for removing CocoaPods. The package ships `Package.swift` and sources under `ios/Sources`; the podspec, Podfile, and CocoaPods Xcode project are not retained.
+Capacitor 8 is the migration boundary for removing CocoaPods. The package ships a production-only `Package.swift` and sources under `ios/Sources`; the podspec, Podfile, CocoaPods Xcode project, and tests are not published. XCTest uses a separate repository-only package under `ios/Tests`.
 
 ## Android is implemented in Kotlin
 
-The Capacitor bridge is thin. Input parsing and recipient formatting are plain Kotlin with unit tests. Samsung's comma separator remains supported; other manufacturers use a semicolon.
+The Capacitor bridge is thin. Input parsing and recipient formatting are plain Kotlin with unit tests. Samsung's comma separator remains supported; other manufacturers use a semicolon. Verification builds Android both standalone and as a subproject of a Capacitor-style host so plugin classpath and property integration are covered.
 
 ## Web remains unsupported
 

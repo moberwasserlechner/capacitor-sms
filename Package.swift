@@ -18,11 +18,6 @@ let package = Package(
                 .product(name: "Cordova", package: "capacitor-swift-pm")
             ],
             path: "ios/Sources/CapacitorSms"
-        ),
-        .testTarget(
-            name: "CapacitorSmsTests",
-            dependencies: ["CapacitorSms"],
-            path: "ios/Tests/CapacitorSmsTests"
         )
     ]
 )

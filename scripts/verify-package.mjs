@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
@@ -50,6 +50,14 @@ try {
   const manifest = JSON.parse(readFileSync(join(packageDir, 'package.json'), 'utf8'));
   if (Object.keys(manifest.dependencies ?? {}).length) throw new Error('production dependencies are not allowed');
 
+  const swiftManifest = readFileSync(join(packageDir, 'Package.swift'), 'utf8');
+  const swiftTargetPaths = [...swiftManifest.matchAll(/path:\s*"([^"]+)"/g)].map((match) => match[1]);
+  for (const targetPath of swiftTargetPaths) {
+    if (!existsSync(join(packageDir, targetPath))) {
+      throw new Error(`Swift target path is missing from the package: ${targetPath}`);
+    }
+  }
+
   const capacitorScope = join(consumer, 'node_modules', '@capacitor');
   mkdirSync(capacitorScope, { recursive: true });
   symlinkSync(realpathSync(join(root, 'node_modules', '@capacitor', 'core')), join(capacitorScope, 'core'));
@@ -66,7 +74,7 @@ try {
   execFileSync('node', ['--input-type=module', '-e', "import { SmsManager } from '@byteowls/capacitor-sms'; if (!SmsManager) throw new Error('ESM export missing')"], { cwd: consumer });
   execFileSync('node', ['--input-type=commonjs', '-e', "if (!require('@byteowls/capacitor-sms').SmsManager) throw new Error('CommonJS export missing')"], { cwd: consumer });
   execFileSync(join(root, 'node_modules', '.bin', 'tsc'), ['-p', 'tsconfig.json'], { cwd: consumer });
-  console.log('package contents, runtime exports, and declarations verified');
+  console.log('package contents, Swift targets, runtime exports, and declarations verified');
 } finally {
   rmSync(workspace, { recursive: true, force: true });
 }

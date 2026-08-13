@@ -22,7 +22,8 @@ jobs:
       - name: Build iOS package
         run: xcodebuild -scheme CapacitorSms -destination 'generic/platform=iOS' build
       - name: Run iOS tests
+        working-directory: ios/Tests
         run: |
           SIMULATOR_ID=$(xcrun simctl list devices available | awk -F '[()]' '/iPhone/{print $2; exit}')
           test -n "$SIMULATOR_ID"
-          xcodebuild -scheme CapacitorSms -destination "platform=iOS Simulator,id=$SIMULATOR_ID" test
+          xcodebuild -scheme CapacitorSmsTests-Package -destination "platform=iOS Simulator,id=$SIMULATOR_ID" test
