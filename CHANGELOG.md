@@ -6,9 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Added best-effort web SMS composition through `sms:` URLs. Web cannot report sent or cancelled status, and protocol-handler behavior varies by browser and operating system. [#33](https://github.com/moberwasserlechner/capacitor-sms/issues/33)
+
 ### Breaking
 - Capacitor 8 is now the only supported Capacitor major.
-- iOS distribution uses Swift Package Manager only. CocoaPods consumers must migrate their Capacitor iOS project before upgrading.
+- iOS distribution uses Swift Package Manager only. CocoaPods consumers must migrate their Capacitor iOS project before upgrading. [#35](https://github.com/moberwasserlechner/capacitor-sms/issues/35)
 - Android now requires API 24 and Java 21.
 - Renamed `SmsManager.send()` to `SmsManager.compose()` and `SmsSendOptions` to `SmsComposeOptions` to clarify that the plugin opens the platform SMS composer; it does not send messages itself.
 
@@ -17,7 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Modernized TypeScript builds, package exports, package verification, and CI, including packed Swift target validation and an Android Capacitor-host integration build.
 - Added maintenance, build, license, download, and release badges to the README.
 - Standardized development on pnpm while documenting both pnpm and npm installation.
-- Web remains explicitly unsupported and rejects with `UNIMPLEMENTED`.
 
 ## [7.0.0] - 2025-07-22
 

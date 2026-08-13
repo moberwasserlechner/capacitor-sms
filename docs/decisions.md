@@ -22,9 +22,9 @@ Capacitor 8 is the migration boundary for removing CocoaPods. The package ships 
 
 The Capacitor bridge is thin. Input parsing and recipient formatting are plain Kotlin with unit tests. Samsung's comma separator remains supported; other manufacturers use a semicolon. Verification builds Android both standalone and from the packed npm artifact as a subproject of a Capacitor-style host, covering the publish allowlist, plugin classpath, and property integration.
 
-## Web remains unsupported
+## Web composition is best effort
 
-A browser cannot provide reliable sent/cancelled semantics. The plugin therefore rejects with Capacitor's `UNIMPLEMENTED` code instead of using `sms:` links or a gateway.
+The web implementation opens an RFC-style `sms:` URL and resolves when navigation is initiated. Browsers cannot reliably detect an SMS protocol handler or report whether the user sent or cancelled the message, so web does not promise native result semantics.
 
 ## Published JavaScript and declarations are bundled
 

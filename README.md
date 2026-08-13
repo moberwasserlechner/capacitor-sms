@@ -54,14 +54,15 @@ await SmsManager.compose({
 });
 ```
 
-Web is intentionally unsupported and rejects with Capacitor's `UNIMPLEMENTED` code.
+### Web behavior
+
+On web, `compose()` makes a best-effort attempt to open the device's SMS handler using an `sms:` URL. The promise resolves when navigation is initiated, not when the message is sent. Browser and operating-system support varies, especially for multiple recipients and desktop protocol handlers; sent and cancelled states cannot be reported.
 
 ## Error codes
 
 - `SEND_CANCELLED` — the user cancelled or closed the SMS composer.
 - `ERR_SEND_FAILED` — iOS reported that sending failed.
 - `ERR_SEND_UNKNOWN_STATE` — iOS returned an unknown result.
-- `UNIMPLEMENTED` — SMS composition is unsupported on web.
 - `ERR_NO_NUMBERS` — no valid recipient numbers were supplied.
 - `ERR_NO_TEXT` — no message text was supplied.
 - `ERR_SERVICE_NOTFOUND` — the device cannot compose SMS messages.
