@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/moberwasserlechner/capacitor-sms#readme
+    about: Check installation, supported platforms, and error codes before opening an issue.
