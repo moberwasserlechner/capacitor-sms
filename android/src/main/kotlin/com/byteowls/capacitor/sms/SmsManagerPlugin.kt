@@ -15,7 +15,7 @@ import com.getcapacitor.annotation.CapacitorPlugin
 @CapacitorPlugin(name = "SmsManager")
 class SmsManagerPlugin : Plugin() {
     @PluginMethod
-    fun send(call: PluginCall) {
+    fun compose(call: PluginCall) {
         val options = try {
             SmsOptions.from(call.data)
         } catch (error: SmsException) {

@@ -64,7 +64,7 @@ try {
   writeFileSync(join(consumer, 'package.json'), '{"name":"consumer","private":true,"type":"module"}\n');
   writeFileSync(
     join(consumer, 'app.ts'),
-    "import { SmsManager } from '@byteowls/capacitor-sms';\nimport type { SmsSendOptions } from '@byteowls/capacitor-sms';\nconst options: SmsSendOptions = { numbers: ['+43123'], text: 'Hello' };\nvoid SmsManager.send(options);\n",
+    "import { SmsManager } from '@byteowls/capacitor-sms';\nimport type { SmsComposeOptions } from '@byteowls/capacitor-sms';\nconst options: SmsComposeOptions = { numbers: ['+43123'], text: 'Hello' };\nvoid SmsManager.compose(options);\n",
   );
   writeFileSync(
     join(consumer, 'tsconfig.json'),

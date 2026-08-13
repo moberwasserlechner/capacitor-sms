@@ -8,7 +8,7 @@ final class CapacitorSmsTests: XCTestCase {
         XCTAssertEqual(plugin.identifier, "SmsManagerPlugin")
         XCTAssertEqual(plugin.jsName, "SmsManager")
         XCTAssertEqual(plugin.pluginMethods.count, 1)
-        XCTAssertEqual(plugin.pluginMethods.first?.name, "send")
+        XCTAssertEqual(plugin.pluginMethods.first?.name, "compose")
     }
 
     func testErrorCodesRemainCompatible() {

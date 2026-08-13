@@ -48,7 +48,7 @@ Version 8 supports Capacitor 8 and uses Swift Package Manager for iOS. Applicati
 ```typescript
 import { SmsManager } from '@byteowls/capacitor-sms';
 
-await SmsManager.send({
+await SmsManager.compose({
   numbers: ['+43 123 123123123', '+43 4564 56456456'],
   text: 'Hello from Capacitor',
 });

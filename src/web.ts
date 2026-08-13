@@ -1,9 +1,9 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { SmsManagerPlugin, SmsSendOptions } from './definitions';
+import type { SmsComposeOptions, SmsManagerPlugin } from './definitions';
 
 export class SmsManagerPluginWeb extends WebPlugin implements SmsManagerPlugin {
-  async send(_options: SmsSendOptions): Promise<void> {
-    throw this.unimplemented('Sending SMS on the web is not supported.');
+  async compose(_options: SmsComposeOptions): Promise<void> {
+    throw this.unimplemented('Composing SMS on the web is not supported.');
   }
 }

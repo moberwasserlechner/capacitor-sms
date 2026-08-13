@@ -16,12 +16,12 @@ public class SmsManagerPlugin: CAPPlugin, CAPBridgedPlugin, MFMessageComposeView
     public let identifier = "SmsManagerPlugin"
     public let jsName = "SmsManager"
     public let pluginMethods: [CAPPluginMethod] = [
-        CAPPluginMethod(name: "send", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "compose", returnType: CAPPluginReturnPromise)
     ]
 
     private var pendingCall: CAPPluginCall?
 
-    @objc func send(_ call: CAPPluginCall) {
+    @objc func compose(_ call: CAPPluginCall) {
         guard let numbers = call.getArray("numbers", String.self), !numbers.isEmpty else {
             call.reject(SmsError.noNumbers.rawValue)
             return

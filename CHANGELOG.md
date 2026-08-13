@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Capacitor 8 is now the only supported Capacitor major.
 - iOS distribution uses Swift Package Manager only. CocoaPods consumers must migrate their Capacitor iOS project before upgrading.
 - Android now requires API 24 and Java 21.
+- Renamed `SmsManager.send()` to `SmsManager.compose()` and `SmsSendOptions` to `SmsComposeOptions` to clarify that the plugin opens the platform SMS composer; it does not send messages itself.
 
 ### Changed
 - Migrated the Android implementation from Java to Kotlin and added unit tests.

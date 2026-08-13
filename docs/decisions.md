@@ -4,7 +4,7 @@ Architectural decisions for `@byteowls/capacitor-sms`.
 
 ## Production compatibility
 
-The documented `SmsManager.send()` API, plugin registration name, and error codes remain compatible within a major version.
+The documented public API, plugin registration name, and error codes remain compatible within a major version. Version 8 renames `SmsManager.send()` to `SmsManager.compose()` because the plugin opens the platform SMS composer rather than sending a message itself.
 
 ## Capacitor 8 is the only supported major in version 8
 

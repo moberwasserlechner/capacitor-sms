@@ -2,10 +2,10 @@ export interface SmsManagerPlugin {
   /**
    * Opens the platform SMS composer with the supplied recipients and message.
    */
-  send(options: SmsSendOptions): Promise<void>;
+  compose(options: SmsComposeOptions): Promise<void>;
 }
 
-export interface SmsSendOptions {
+export interface SmsComposeOptions {
   numbers: string[];
   text: string;
 }
