@@ -18,9 +18,14 @@ class SmsValidationError extends Error {
 
 export class SmsManagerPluginWeb extends WebPlugin implements SmsManagerPlugin {
   async compose(options: SmsComposeOptions): Promise<void> {
-    const numbers = Array.isArray(options?.numbers)
-      ? options.numbers.filter((number) => typeof number === 'string' && number.length > 0)
-      : [];
+    const numbers: string[] = [];
+    if (Array.isArray(options?.numbers)) {
+      for (const number of options.numbers) {
+        if (typeof number === 'string' && number.length > 0) {
+          numbers.push(number);
+        }
+      }
+    }
     if (numbers.length === 0) {
       throw new SmsValidationError('ERR_NO_NUMBERS');
     }

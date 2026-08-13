@@ -16,13 +16,14 @@ Instructions for coding agents working on this project.
 10. Packaging changes require `pnpm verify:package`.
 11. Ask the user for review and propose a sensible commit before committing.
 12. Never add AI attribution, generated-by footers, or AI `Co-Authored-By` trailers.
+13. Prefer explicit `if` blocks over ternary expressions or dense one-line conditions when they improve readability.
 
 ## Stack
 
 - TypeScript in strict mode
 - pnpm
 - Capacitor 8
-- Web (explicitly unsupported), Android (Kotlin), and iOS (Swift)
+- Web (best-effort `sms:` URL composition), Android (Kotlin), and iOS (Swift)
 - iOS packaging through Swift Package Manager only
 - Vitest, JUnit, and XCTest
 
