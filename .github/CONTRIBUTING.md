@@ -22,7 +22,7 @@ pnpm verify:ios
 ## Pull requests
 
 - Open one focused pull request per subject and link its GitHub issue.
-- Develop on a topic branch rather than `main`.
+- Develop on a topic branch and target `develop`. Releases reach `main` through the maintainers' Git Flow process, not pull requests.
 - Explain the problem, solution, and verification performed.
 - Preserve public API and documented behaviour unless a major release explicitly approves a breaking change.
 - Add regression tests for bug fixes and tests for new behaviour.

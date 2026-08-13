@@ -17,6 +17,7 @@ Instructions for coding agents working on this project.
 11. Ask the user for review and propose a sensible commit before committing.
 12. Never add AI attribution, generated-by footers, or AI `Co-Authored-By` trailers.
 13. Prefer explicit `if` blocks over ternary expressions or dense one-line conditions when they improve readability.
+14. Follow the formatting rules in `.editorconfig` for every edited or created file.
 
 ## Stack
 

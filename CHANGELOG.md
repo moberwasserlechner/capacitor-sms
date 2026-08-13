@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed `SmsManager.send()` to `SmsManager.compose()` and `SmsSendOptions` to `SmsComposeOptions` to clarify that the plugin opens the platform SMS composer; it does not send messages itself.
 
 ### Changed
+- Documented why direct SMS sending without user interaction is not supported. [#38](https://github.com/moberwasserlechner/capacitor-sms/issues/38)
 - Migrated the Android implementation from Java to Kotlin and added unit tests.
 - Modernized TypeScript builds, package exports, package verification, and CI, including packed Swift target validation and an Android Capacitor-host integration build.
 - Added maintenance, build, license, download, and release badges to the README.

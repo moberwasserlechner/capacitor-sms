@@ -17,6 +17,15 @@
 
 Opens the device's native SMS composer with recipients and message text. The user remains responsible for sending the message.
 
+## Direct sending is not supported
+
+This plugin only opens the platform SMS composer. The user must review the message and tap **Send**; the plugin cannot send an SMS automatically.
+
+- **iOS:** Apple provides no public API for third-party apps to send SMS messages without user interaction.
+- **Android:** Direct sending requires sensitive SMS permissions. Google Play restricts these permissions primarily to default SMS handlers and narrowly approved use cases; sideloaded apps are outside the normal Play distribution model.
+
+The plugin will **not** provide Android-only direct sending.
+
 ## Installation
 
 ### pnpm (recommended)
