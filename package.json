@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "@capacitor/core": "7.4.2",
-    "@capacitor/ios": "7.4.2",
+    "@capacitor/ios": "7.6.9",
     "@capacitor/android": "7.4.2",
     "rimraf": "6.0.1",
     "typescript": "5.8.3"
